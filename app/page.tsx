@@ -53,7 +53,7 @@ export default function HomePage() {
       name: "Ahmet Yılmaz",
       role: "Volkswagen Golf Sahibi",
       content:
-        "DSG şanzıman problemimi çok profesyonel şekilde çözdüler. Artık aracım ilk günkü gibi çalışıyor. Kesinlikle tavsiye ederim!",
+        'DSG şanzıman problemimi çok profesyonel şekilde çözdüler. Artık aracım ilk günkü gibi çalışıyor. Kesinlikle tavsiye ederim!',
       rating: 5,
       image: "/placeholder.svg?height=60&width=60",
     },
