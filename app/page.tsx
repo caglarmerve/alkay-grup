@@ -53,7 +53,7 @@ export default function HomePage() {
       name: "Ahmet Yılmaz",
       role: "Volkswagen Golf Sahibi",
       content:
-        'DSG şanzıman problemimi çok profesyonel şekilde çözdüler. Artık aracım ilk günkü gibi çalışıyor. Kesinlikle tavsiye ederim!',
+        "DSG şanzıman problemimi çok profesyonel şekilde çözdüler. Artık aracım ilk günkü gibi çalışıyor. Kesinlikle tavsiye ederim!",
       rating: 5,
       image: "/placeholder.svg?height=60&width=60",
     },
@@ -379,7 +379,7 @@ export default function HomePage() {
                 Uzman Olduğumuz Markalar
               </Badge>
               <h2 className="text-4xl lg:text-6xl font-bold">
-              Avrupa&apos;nın<span className="text-yellow-400">Önde Gelen</span> Markaları
+                {"Avrupa'nın"} <span className="text-yellow-400">Önde Gelen</span> Markaları
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                 Volkswagen Group ve Fiat markalarında uzmanlaşmış ekibimizle her marka için özel hizmet
@@ -515,7 +515,7 @@ export default function HomePage() {
                 </CardHeader>
                 <CardContent className="text-center px-8 pb-8">
                   <p className="text-lg text-gray-700 leading-relaxed">
-                    Türkiye&apos; en güvenilir ve tercih edilen premium otomotiv servis merkezi olmak. Teknolojik
+                    {"Türkiye'nin"} en güvenilir ve tercih edilen premium otomotiv servis merkezi olmak. Teknolojik
                     gelişmeleri yakından takip ederek, müşterilerimize her zaman en iyi hizmeti sunmak ve otomotiv
                     sektöründe kalite standardını belirleyen marka olmak.
                   </p>
@@ -649,7 +649,7 @@ export default function HomePage() {
 
                     <div className="space-y-4">
                       <p className="text-2xl text-gray-700 leading-relaxed italic">
-                        "{testimonials[activeTestimonial].content}"
+                        {`"${testimonials[activeTestimonial].content}"`}
                       </p>
 
                       <div className="flex justify-center space-x-1">
