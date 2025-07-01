@@ -1,44 +1,36 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import {
-  Car,
   Wrench,
   Zap,
   Palette,
   Settings,
   Shield,
-  Users,
   Phone,
   MapPin,
-  Mail,
   Clock,
   CheckCircle,
-  Star,
   Calendar,
   MessageCircle,
   ArrowRight,
-  Quote,
-  TrendingUp,
+  Menu,
+  X,
+  Star,
+  Gauge,
+  Car,
+  FileText,
+  Users,
   Sparkles,
-  CloudLightningIcon as Lightning,
-  Heart,
-  ThumbsUp,
-  Camera,
-  ChevronDown,
-  Globe,
-  Smartphone,
 } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 import { useState, useEffect } from "react"
 
 export default function HomePage() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [activeTestimonial, setActiveTestimonial] = useState(0)
-  const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,320 +40,424 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const testimonials = [
-    {
-      name: "Ahmet Yılmaz",
-      role: "Volkswagen Golf Sahibi",
-      content:
-        "DSG şanzıman problemimi çok profesyonel şekilde çözdüler. Artık aracım ilk günkü gibi çalışıyor. Kesinlikle tavsiye ederim!",
-      rating: 5,
-      image: "/placeholder.svg?height=60&width=60",
-    },
-    {
-      name: "Elif Kaya",
-      role: "Audi A3 Sahibi",
-      content: "Elektrik sistemindeki arızayı hemen tespit ettiler. Hem hızlı hem de uygun fiyatlı. Çok memnun kaldım.",
-      rating: 5,
-      image: "/placeholder.svg?height=60&width=60",
-    },
-    {
-      name: "Mehmet Demir",
-      role: "Seat Leon Sahibi",
-      content: "Kaporta ve boya işlemi mükemmeldi. Aracım showroom'dan yeni çıkmış gibi oldu. Profesyonel ekip!",
-      rating: 5,
-      image: "/placeholder.svg?height=60&width=60",
-    },
-  ]
-
-  const faqs = [
-    {
-      question: "Randevu almak için ne yapmam gerekiyor?",
-      answer:
-        "Telefon, WhatsApp veya web sitemizden kolayca randevu alabilirsiniz. Acil durumlar için 7/24 hizmet veriyoruz.",
-    },
-    {
-      question: "Orjinal parça garantisi veriyor musunuz?",
-      answer:
-        "Evet, tüm orjinal parçalarımız için 2 yıl garanti veriyoruz. Yan sanayi parçalar için de 1 yıl garanti mevcuttur.",
-    },
-    {
-      question: "DSG şanzıman bakımı ne kadar sürer?",
-      answer: "DSG şanzıman bakımı genellikle 2-3 saat sürmektedir. Onarım durumunda süre değişkenlik gösterebilir.",
-    },
-    {
-      question: "Hangi ödeme yöntemlerini kabul ediyorsunuz?",
-      answer: "Nakit, kredi kartı, banka kartı ve havale/EFT ile ödeme kabul ediyoruz. Taksit imkanları mevcuttur.",
-    },
-  ]
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+      setMobileMenuOpen(false)
+    }
+  }
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-          isScrolled ? "bg-white/95 backdrop-blur-lg border-b shadow-lg" : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled
+            ? "bg-white/95 backdrop-blur-xl border-b border-slate-200/50 shadow-xl shadow-slate-900/5"
+            : "bg-white/90 backdrop-blur-md"
         }`}
       >
-        <div className="container flex h-20 items-center justify-between px-4">
-          <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-br from-blue-600 to-purple-600 p-2 rounded-xl">
-              <Car className="h-8 w-8 text-white" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 md:h-20 lg:h-24">
+            {/* Logo */}
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl blur-sm opacity-20"></div>
+                <Image
+                  src="/images/alkay-grup-logo.png"
+                  alt="Alkay Grup Logo"
+                  width={48}
+                  height={48}
+                  className="relative h-10 w-10 sm:h-12 sm:w-12 lg:h-14 lg:w-14 object-contain"
+                />
+              </div>
+              <div>
+                <span className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-slate-800 via-slate-700 to-slate-900 bg-clip-text text-transparent tracking-tight">
+                  ALKAY GRUP
+                </span>
+                <p className="text-xs sm:text-sm text-slate-600 -mt-1 hidden sm:block font-medium tracking-wide">
+                  Premium Otomotiv Servisi
+                </p>
+              </div>
             </div>
-            <div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                AutoExpert
-              </span>
-              <p className="text-xs text-gray-500 -mt-1">Premium Servis</p>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-8 xl:space-x-10">
+              {["hizmetler", "markalar", "hakkimizda", "galeri", "yorumlar", "iletisim"].map((section) => (
+                <button
+                  key={section}
+                  onClick={() => scrollToSection(section)}
+                  className="relative text-sm font-semibold text-slate-700 hover:text-slate-900 transition-all duration-300 group capitalize tracking-wide"
+                >
+                  {section === "hakkimizda" ? "Hakkımızda" : section === "iletisim" ? "İletişim" : section}
+                  <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-gradient-to-r from-slate-800 to-slate-600 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-gradient-to-r from-slate-800 to-slate-600 blur-sm transition-all duration-300 group-hover:w-full opacity-50"></span>
+                </button>
+              ))}
+            </nav>
+
+            {/* Desktop Buttons */}
+            <div className="hidden md:flex items-center space-x-3 lg:space-x-4">
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 bg-transparent text-sm font-medium transition-all duration-300 shadow-sm hover:shadow-md"
+              >
+                <MessageCircle className="h-4 w-4 mr-2" />
+                WhatsApp
+              </Button>
+              <Button className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black text-white shadow-lg hover:shadow-xl text-sm font-semibold transition-all duration-300 transform hover:scale-105">
+                <Phone className="h-4 w-4 mr-2" />
+                Hemen Ara
+              </Button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="flex items-center space-x-2 md:hidden">
+              <Button
+                size="sm"
+                className="bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black text-white p-2 shadow-lg"
+              >
+                <Phone className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-slate-700 hover:text-slate-900 p-2 hover:bg-slate-100 transition-colors"
+              >
+                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </Button>
             </div>
           </div>
 
-          <nav className="hidden lg:flex items-center space-x-8">
-            <Link
-              href="#hizmetler"
-              className="text-sm font-medium hover:text-blue-600 transition-colors relative group"
-            >
-              Hizmetler
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-            </Link>
-            <Link href="#markalar" className="text-sm font-medium hover:text-blue-600 transition-colors relative group">
-              Markalar
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-            </Link>
-            <Link
-              href="#hakkimizda"
-              className="text-sm font-medium hover:text-blue-600 transition-colors relative group"
-            >
-              Hakkımızda
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-            </Link>
-            <Link href="#galeri" className="text-sm font-medium hover:text-blue-600 transition-colors relative group">
-              Galeri
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-            </Link>
-            <Link href="#yorumlar" className="text-sm font-medium hover:text-blue-600 transition-colors relative group">
-              Yorumlar
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-            </Link>
-            <Link href="#iletisim" className="text-sm font-medium hover:text-blue-600 transition-colors relative group">
-              İletişim
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-            </Link>
-          </nav>
-
-          <div className="flex items-center space-x-3">
-            <Button variant="outline" size="sm" className="hidden md:flex">
-              <MessageCircle className="h-4 w-4 mr-2" />
-              WhatsApp
-            </Button>
-            <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-lg">
-              <Phone className="h-4 w-4 mr-2" />
-              Hemen Ara
-            </Button>
-          </div>
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-slate-200/50 shadow-lg">
+              <div className="px-4 py-6 space-y-4">
+                {["hizmetler", "markalar", "hakkimizda", "galeri", "yorumlar", "iletisim"].map((section) => (
+                  <button
+                    key={section}
+                    onClick={() => scrollToSection(section)}
+                    className="block w-full text-left text-slate-700 hover:text-slate-900 font-semibold py-3 capitalize transition-colors border-b border-slate-100 last:border-b-0"
+                  >
+                    {section === "hakkimizda" ? "Hakkımızda" : section === "iletisim" ? "İletişim" : section}
+                  </button>
+                ))}
+                <div className="pt-4 border-t border-slate-200">
+                  <Button className="w-full bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black text-white font-semibold shadow-lg">
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    WhatsApp İletişim
+                  </Button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </header>
 
-      <main className="flex-1">
+      {/* Main Content */}
+      <main className="pt-16 md:pt-20 lg:pt-24">
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 overflow-hidden">
-          {/* Background Effects */}
-          <div className="absolute inset-0 bg-[url('/placeholder.svg?height=1080&width=1920')] bg-cover bg-center opacity-10"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
+        <section className="relative min-h-screen flex items-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 bg-[url('/placeholder.svg?height=1080&width=1920')] bg-cover bg-center opacity-5"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-slate-800/80 to-slate-900/90"></div>
 
-          {/* Floating Elements */}
-          <div className="absolute top-20 left-10 w-20 h-20 bg-blue-500/20 rounded-full blur-xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-32 h-32 bg-purple-500/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+          {/* Decorative Elements */}
+          <div className="absolute top-20 right-20 w-72 h-72 bg-gradient-to-br from-slate-700/20 to-slate-800/20 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-tr from-slate-600/10 to-slate-700/10 rounded-full blur-3xl"></div>
 
-          <div className="container px-4 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div className="space-y-8 text-white">
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-2">
-                    <Sparkles className="h-5 w-5 text-yellow-400" />
-                    <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-semibold">
-                      Premium Otomotiv Servisi
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div className="text-white space-y-8 lg:space-y-10">
+                <div className="space-y-6 lg:space-y-8">
+                  <div className="flex items-center space-x-3">
+                    <div className="p-2 bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg">
+                      <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-slate-300" />
+                    </div>
+                    <Badge className="bg-gradient-to-r from-slate-700/80 to-slate-800/80 backdrop-blur-sm text-slate-200 font-semibold text-sm px-4 py-2 border border-slate-600/30">
+                      Premium Otomotiv Hizmetleri
                     </Badge>
                   </div>
 
-                  <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-                    Aracınız
-                    <span className="block bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent">
-                      Güvenli Ellerde
+                  <h1 className="font-bold leading-tight tracking-tight">
+                    <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-slate-100">
+                      Avrupa Markalarında
+                    </span>
+                    <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl bg-gradient-to-r from-slate-300 via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                      Uzman Çözümler
                     </span>
                   </h1>
 
-                  <p className="text-xl lg:text-2xl text-blue-100 max-w-2xl leading-relaxed">
-                    15+ yıllık deneyimimiz ve son teknoloji ekipmanlarımızla Volkswagen, Seat, Skoda, Audi ve Fiat
-                    markalarında <span className="text-yellow-400 font-semibold">premium hizmet</span> sunuyoruz.
+                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-slate-300 leading-relaxed max-w-2xl font-light">
+                    <span className="text-slate-200 font-semibold">Volkswagen, Seat, Skoda, Audi ve Fiat</span>{" "}
+                    markalarında 15+ yıllık deneyimimiz ile yetkili servis kalitesinde hizmet.
+                    <span className="text-slate-200 font-medium"> Orjinal parça garantisi</span> ve uzman kadromuzla
+                    aracınız güvenli ellerde.
                   </p>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-black font-semibold shadow-2xl transform hover:scale-105 transition-all"
+                    className="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300 px-8 py-4 text-base"
                   >
-                    <Calendar className="h-5 w-5 mr-2" />
-                    Randevu Al
+                    <Calendar className="h-5 w-5 mr-3" />
+                    Ücretsiz Ön Değerlendirme
                   </Button>
-                  <Button size="lg" variant="outline">
-                    <ArrowRight className="h-5 w-5 mr-2" />
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-2 border-slate-400 text-slate-200 hover:bg-slate-200 hover:text-slate-900 bg-transparent font-semibold px-8 py-4 text-base transition-all duration-300"
+                    onClick={() => scrollToSection("hakkimizda")}
+                  >
+                    <ArrowRight className="h-5 w-5 mr-3" />
                     Hakkımızda
                   </Button>
                 </div>
 
-                <div className="grid grid-cols-3 gap-6 pt-8">
+                <div className="grid grid-cols-3 gap-6 sm:gap-8 pt-8 lg:pt-12">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-yellow-400">1000+</div>
-                    <div className="text-sm text-blue-200">Mutlu Müşteri</div>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-200 mb-2">2500+</div>
+                    <div className="text-sm sm:text-base text-slate-400 font-medium">Servis Edilen Araç</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-yellow-400">15+</div>
-                    <div className="text-sm text-blue-200">Yıl Deneyim</div>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-200 mb-2">15+</div>
+                    <div className="text-sm sm:text-base text-slate-400 font-medium">Yıl Deneyim</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-yellow-400">%98</div>
-                    <div className="text-sm text-blue-200">Memnuniyet</div>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-200 mb-2">%99</div>
+                    <div className="text-sm sm:text-base text-slate-400 font-medium">Müşteri Memnuniyeti</div>
                   </div>
                 </div>
               </div>
 
-              <div className="relative">
+              <div className="relative mt-12 lg:mt-0">
                 <div className="relative z-10">
-                  <Image
-                    src="/placeholder.svg?height=600&width=700"
-                    alt="Premium otomotiv servisi"
-                    width={700}
-                    height={600}
-                    className="rounded-3xl shadow-2xl"
-                  />
+                  {/* Main Image */}
+                  <div className="relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-700/20 to-slate-800/20 rounded-3xl blur-2xl transform rotate-6"></div>
+                    <Image
+                      src="/placeholder.svg?height=600&width=700"
+                      alt="Premium otomotiv servisi"
+                      width={700}
+                      height={600}
+                      className="relative w-full h-auto rounded-3xl shadow-2xl border border-slate-700/30"
+                    />
+                  </div>
 
                   {/* Floating Cards */}
-                  <div className="absolute -top-6 -left-6 bg-white/95 backdrop-blur-sm p-4 rounded-2xl shadow-xl">
-                    <div className="flex items-center space-x-3">
-                      <div className="bg-green-100 p-2 rounded-full">
-                        <CheckCircle className="h-6 w-6 text-green-600" />
-                      </div>
-                      <div>
-                        <p className="font-bold text-gray-900">Orjinal Parça</p>
-                        <p className="text-sm text-gray-600">2 Yıl Garanti</p>
-                      </div>
-                    </div>
+                  <div className="hidden sm:block absolute -top-6 -left-6 lg:-top-8 lg:-left-8">
+                    <Card className="bg-white/95 backdrop-blur-xl border-0 shadow-2xl shadow-slate-900/20">
+                      <CardContent className="p-4 lg:p-6">
+                        <div className="flex items-center space-x-3 lg:space-x-4">
+                          <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 p-2 lg:p-3 rounded-xl shadow-lg">
+                            <CheckCircle className="h-5 w-5 lg:h-6 lg:w-6 text-white" />
+                          </div>
+                          <div>
+                            <p className="font-bold text-slate-900 text-sm lg:text-base">Orjinal Parça Garantisi</p>
+                            <p className="text-xs lg:text-sm text-slate-600 font-medium">2 Yıl Tam Garanti</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
                   </div>
 
-                  <div className="absolute -bottom-6 -right-6 bg-gradient-to-r from-blue-600 to-purple-600 p-4 rounded-2xl shadow-xl text-white">
-                    <div className="flex items-center space-x-3">
-                      <div className="bg-white/20 p-2 rounded-full">
-                        <Lightning className="h-6 w-6" />
-                      </div>
-                      <div>
-                        <p className="font-bold">Hızlı Servis</p>
-                        <p className="text-sm text-blue-100">Aynı Gün Teslimat</p>
-                      </div>
-                    </div>
+                  <div className="hidden sm:block absolute -bottom-6 -right-6 lg:-bottom-8 lg:-right-8">
+                    <Card className="bg-gradient-to-br from-slate-800 to-slate-900 border-0 shadow-2xl shadow-slate-900/30">
+                      <CardContent className="p-4 lg:p-6">
+                        <div className="flex items-center space-x-3 lg:space-x-4">
+                          <div className="bg-gradient-to-br from-slate-600 to-slate-700 p-2 lg:p-3 rounded-xl shadow-lg">
+                            <Gauge className="h-5 w-5 lg:h-6 lg:w-6 text-slate-200" />
+                          </div>
+                          <div>
+                            <p className="font-bold text-slate-100 text-sm lg:text-base">Bilgisayarlı Teşhis</p>
+                            <p className="text-xs lg:text-sm text-slate-300 font-medium">Son Teknoloji Ekipman</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
                   </div>
                 </div>
-
-                {/* Background Glow */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-3xl blur-3xl -z-10"></div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Services Section */}
-        <section id="hizmetler" className="py-24 bg-gradient-to-b from-gray-50 to-white">
-          <div className="container px-4">
-            <div className="text-center space-y-6 mb-20">
-              <Badge className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 text-lg px-6 py-2">
-                Premium Hizmetlerimiz
+        {/* Brands Section */}
+        <section id="markalar" className="py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-slate-50 to-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center space-y-6 lg:space-y-8 mb-16 lg:mb-24">
+              <Badge className="bg-gradient-to-r from-slate-100 to-slate-200 text-slate-800 px-6 py-3 text-sm font-semibold border border-slate-300/50">
+                Uzman Olduğumuz Markalar
               </Badge>
-              <h2 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-                Kapsamlı Otomotiv Çözümleri
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent tracking-tight">
+                Avrupa'nın Prestijli Markaları
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Son teknoloji ekipmanlarımız ve uzman ekibimizle aracınızın tüm ihtiyaçları için
-                <span className="text-blue-600 font-semibold"> tek adres</span>
+              <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-light">
+                Her marka için özel eğitim almış sertifikalı teknisyenlerimiz ve orijinal yedek parça ağımız ile
+                <span className="text-slate-800 font-semibold"> yetkili servis standardında</span> hizmet sunuyoruz
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8 mb-16">
+              {[
+                { name: "Volkswagen", color: "from-blue-600 to-blue-700", desc: "Alman Mühendisliği", icon: "🇩🇪" },
+                { name: "Audi", color: "from-red-600 to-red-700", desc: "Premium Lüks", icon: "🏆" },
+                { name: "Seat", color: "from-orange-600 to-orange-700", desc: "İspanyol Dinamizmi", icon: "🇪🇸" },
+                { name: "Skoda", color: "from-emerald-600 to-emerald-700", desc: "Çek Kalitesi", icon: "⭐" },
+                { name: "Fiat", color: "from-red-500 to-red-600", desc: "İtalyan Tasarımı", icon: "🇮🇹" },
+              ].map((brand, index) => (
+                <Card
+                  key={index}
+                  className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-0 shadow-lg bg-white/80 backdrop-blur-sm"
+                >
+                  <CardContent className="p-6 lg:p-8 text-center">
+                    <div
+                      className={`bg-gradient-to-br ${brand.color} w-16 h-16 lg:w-20 lg:h-20 rounded-2xl flex items-center justify-center mb-4 lg:mb-6 mx-auto group-hover:scale-110 transition-transform duration-300 shadow-xl`}
+                    >
+                      <Car className="h-8 w-8 lg:h-10 lg:w-10 text-white" />
+                    </div>
+                    <h3 className="font-bold text-lg lg:text-xl text-slate-900 mb-2 tracking-wide">{brand.name}</h3>
+                    <p className="text-sm lg:text-base text-slate-600 font-medium">{brand.desc}</p>
+                    <div className="text-2xl mt-2">{brand.icon}</div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <Card className="bg-gradient-to-br from-slate-50 to-slate-100 border-0 shadow-xl">
+              <CardContent className="p-8 lg:p-12">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                  <div className="text-center">
+                    <div className="bg-gradient-to-br from-slate-700 to-slate-800 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                      <FileText className="h-8 w-8 text-slate-200" />
+                    </div>
+                    <h4 className="font-bold text-xl text-slate-900 mb-3">Orjinal Parça Garantisi</h4>
+                    <p className="text-slate-600 leading-relaxed">
+                      Tüm yedek parçalar için 2 yıl tam garanti ve yetkili servis kalitesi
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <div className="bg-gradient-to-br from-slate-700 to-slate-800 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                      <Users className="h-8 w-8 text-slate-200" />
+                    </div>
+                    <h4 className="font-bold text-xl text-slate-900 mb-3">Sertifikalı Uzmanlar</h4>
+                    <p className="text-slate-600 leading-relaxed">
+                      Marka sertifikalı ve sürekli eğitim alan profesyonel teknisyen kadrosu
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <div className="bg-gradient-to-br from-slate-700 to-slate-800 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                      <Gauge className="h-8 w-8 text-slate-200" />
+                    </div>
+                    <h4 className="font-bold text-xl text-slate-900 mb-3">İleri Teknoloji</h4>
+                    <p className="text-slate-600 leading-relaxed">
+                      Son model teşhis cihazları ve kalibrasyon ekipmanları
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <section id="hizmetler" className="py-20 sm:py-24 lg:py-32 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center space-y-6 lg:space-y-8 mb-16 lg:mb-24">
+              <Badge className="bg-gradient-to-r from-slate-100 to-slate-200 text-slate-800 px-6 py-3 text-sm font-semibold border border-slate-300/50">
+                Profesyonel Hizmetlerimiz
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent tracking-tight">
+                Kapsamlı Otomotiv Çözümleri
+              </h2>
+              <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-light">
+                Yetkili servis kalitesinde hizmet, orjinal parça garantisi ve uzman teknisyen kadromuz ile
+                <span className="text-slate-800 font-semibold"> aracınızın tüm ihtiyaçları için tek adres</span>
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
               {[
                 {
                   icon: Wrench,
-                  title: "Mekanik Onarım",
-                  description: "Motor, fren, süspansiyon ve tüm mekanik sistemlerde uzman onarım hizmeti",
-                  color: "from-blue-500 to-blue-600",
-                  bgColor: "bg-blue-50",
-                  features: ["Motor Revizyonu", "Fren Sistemi", "Süspansiyon", "Egzoz Sistemi"],
+                  title: "Genel Mekanik Onarım",
+                  description: "Motor, şanzıman, fren, süspansiyon ve tüm mekanik sistemlerde uzman onarım hizmeti",
+                  color: "from-slate-700 to-slate-800",
+                  bgColor: "from-slate-50 to-slate-100",
+                  features: ["Motor Revizyonu", "Şanzıman Onarımı", "Fren Sistemi", "Süspansiyon Bakımı"],
                 },
                 {
                   icon: Zap,
-                  title: "Elektrik Sistemleri",
-                  description: "Araç elektrik sistemleri, ECU programlama ve elektronik arıza tespiti",
-                  color: "from-yellow-500 to-orange-500",
-                  bgColor: "bg-yellow-50",
-                  features: ["ECU Programlama", "Kablo Tesisatı", "Sensör Değişimi", "Arıza Tespiti"],
+                  title: "Elektronik Sistemler",
+                  description: "ECU programlama, elektronik arıza tespiti ve modern araç elektrik sistemleri",
+                  color: "from-amber-600 to-amber-700",
+                  bgColor: "from-amber-50 to-amber-100",
+                  features: ["ECU Programlama", "Arıza Tespiti", "Kablo Tesisatı", "Sensör Kalibrasyonu"],
                 },
                 {
                   icon: Palette,
                   title: "Kaporta & Boya",
-                  description: "Profesyonel kaporta onarımı ve fırın boya uygulaması",
-                  color: "from-purple-500 to-pink-500",
-                  bgColor: "bg-purple-50",
-                  features: ["Fırın Boya", "Kaporta Onarımı", "Çizik Giderme", "Tampon Onarımı"],
+                  description: "Profesyonel kaporta onarımı ve fırın boya uygulaması ile mükemmel sonuçlar",
+                  color: "from-red-600 to-red-700",
+                  bgColor: "from-red-50 to-red-100",
+                  features: ["Fırın Boya", "Kaporta Onarımı", "Çizik Giderme", "Tampon Yenileme"],
                 },
                 {
                   icon: Settings,
-                  title: "DSG Şanzıman",
-                  description: "DSG şanzıman bakım, onarım ve yazılım güncellemeleri",
-                  color: "from-green-500 to-emerald-500",
-                  bgColor: "bg-green-50",
-                  features: ["DSG Bakımı", "Yazılım Güncelleme", "Kavrama Değişimi", "Yağ Değişimi"],
+                  title: "DSG/CVT Şanzıman",
+                  description: "Otomatik şanzıman bakım, onarım ve yazılım güncellemeleri konusunda uzman hizmet",
+                  color: "from-emerald-600 to-emerald-700",
+                  bgColor: "from-emerald-50 to-emerald-100",
+                  features: ["DSG Bakımı", "CVT Onarımı", "Yazılım Güncelleme", "Performans Optimizasyonu"],
                 },
                 {
                   icon: Shield,
-                  title: "Orjinal Parça",
-                  description: "Orjinal ve yan sanayi yedek parça tedariki",
-                  color: "from-red-500 to-rose-500",
-                  bgColor: "bg-red-50",
-                  features: ["Orjinal Parça", "Yan Sanayi", "Hızlı Tedarik", "Garanti"],
+                  title: "Orjinal Yedek Parça",
+                  description: "Orjinal ve OEM kalitesinde yedek parça tedariki ve profesyonel montaj hizmeti",
+                  color: "from-purple-600 to-purple-700",
+                  bgColor: "from-purple-50 to-purple-100",
+                  features: ["Orjinal Parça", "OEM Kalitesi", "Hızlı Tedarik", "2 Yıl Garanti"],
                 },
                 {
-                  icon: Users,
-                  title: "Uzman Ekip",
-                  description: "Sertifikalı teknisyen ve tekniker kadromuz",
-                  color: "from-indigo-500 to-blue-500",
-                  bgColor: "bg-indigo-50",
-                  features: ["Sertifikalı Ekip", "Sürekli Eğitim", "Deneyimli Kadro", "Profesyonel Hizmet"],
+                  icon: Gauge,
+                  title: "Bilgisayarlı Teşhis",
+                  description: "Son teknoloji teşhis cihazları ile detaylı araç analizi ve performans değerlendirmesi",
+                  color: "from-indigo-600 to-indigo-700",
+                  bgColor: "from-indigo-50 to-indigo-100",
+                  features: ["Detaylı Analiz", "Performans Testi", "Emisyon Kontrolü", "Sistem Kalibrasyonu"],
                 },
               ].map((service, index) => (
                 <Card
                   key={index}
-                  className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 shadow-lg"
+                  className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border-0 shadow-lg overflow-hidden"
                 >
-                  <CardHeader className={`${service.bgColor} rounded-t-xl`}>
+                  <div className={`bg-gradient-to-br ${service.bgColor} p-6 lg:p-8`}>
                     <div
-                      className={`bg-gradient-to-r ${service.color} w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg`}
+                      className={`bg-gradient-to-br ${service.color} w-14 h-14 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-xl`}
                     >
-                      <service.icon className="h-8 w-8 text-white" />
+                      <service.icon className="h-7 w-7 lg:h-8 lg:w-8 text-white" />
                     </div>
-                    <CardTitle className="text-2xl font-bold text-gray-900">{service.title}</CardTitle>
-                    <CardDescription className="text-gray-600 text-base leading-relaxed">
+                    <h3 className="text-xl lg:text-2xl font-bold text-slate-900 mb-3 tracking-wide">{service.title}</h3>
+                    <p className="text-slate-600 text-sm lg:text-base leading-relaxed mb-6 font-light">
                       {service.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="p-6">
-                    <ul className="space-y-2">
+                    </p>
+                  </div>
+
+                  <CardContent className="p-6 lg:p-8 bg-white">
+                    <ul className="space-y-3 mb-6">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center space-x-2">
-                          <CheckCircle className="h-4 w-4 text-green-500" />
-                          <span className="text-sm text-gray-600">{feature}</span>
+                        <li key={idx} className="flex items-center space-x-3">
+                          <CheckCircle className="h-4 w-4 lg:h-5 lg:w-5 text-emerald-500 flex-shrink-0" />
+                          <span className="text-sm lg:text-base text-slate-600 font-medium">{feature}</span>
                         </li>
                       ))}
                     </ul>
-                    <Button className="w-full mt-6 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-900 hover:to-black">
-                      Detaylı Bilgi
+                    <Button className="w-full bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                      Detaylı Bilgi Al
                       <ArrowRight className="h-4 w-4 ml-2" />
                     </Button>
                   </CardContent>
@@ -371,387 +467,151 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Brands Section */}
-        <section id="markalar" className="py-24 bg-gradient-to-r from-slate-900 to-gray-900 text-white">
-          <div className="container px-4">
-            <div className="text-center space-y-6 mb-20">
-              <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-lg px-6 py-2">
-                Uzman Olduğumuz Markalar
-              </Badge>
-              <h2 className="text-4xl lg:text-6xl font-bold">
-                {"Avrupa'nın"} <span className="text-yellow-400">Önde Gelen</span> Markaları
-              </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                Volkswagen Group ve Fiat markalarında uzmanlaşmış ekibimizle her marka için özel hizmet
-              </p>
-            </div>
+        {/* About Section */}
+        <section
+          id="hakkimizda"
+          className="py-20 sm:py-24 lg:py-32 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden"
+        >
+          {/* Background Elements */}
+          <div className="absolute inset-0 bg-[url('/placeholder.svg?height=1080&width=1920')] bg-cover bg-center opacity-5"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-slate-700/20 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-slate-600/20 to-transparent rounded-full blur-3xl"></div>
 
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
-              {[
-                { name: "Volkswagen", specialty: "Golf, Passat, Polo" },
-                { name: "Seat", specialty: "Leon, Ibiza, Ateca" },
-                { name: "Škoda", specialty: "Octavia, Fabia, Superb" },
-                { name: "Audi", specialty: "A3, A4, Q3, Q5" },
-                { name: "Fiat", specialty: "Egea, Punto, 500" },
-              ].map((brand, index) => (
-                <Card
-                  key={index}
-                  className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
-                >
-                  <CardContent className="p-8 text-center">
-                    <Image
-                      src="/placeholder.svg?height=80&width=120"
-                      alt={brand.name}
-                      width={120}
-                      height={80}
-                      className="mx-auto mb-4 filter brightness-0 invert"
-                    />
-                    <h3 className="font-bold text-xl mb-2">{brand.name}</h3>
-                    <p className="text-sm text-gray-300">{brand.specialty}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div className="space-y-8 lg:space-y-10">
+                <div>
+                  <Badge className="bg-gradient-to-r from-slate-700/80 to-slate-800/80 backdrop-blur-sm text-slate-200 px-6 py-3 mb-6 border border-slate-600/30">
+                    Hakkımızda
+                  </Badge>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-8 tracking-tight">
+                    15 Yıllık Deneyim ile <span className="text-slate-300">Güvenilir Hizmet</span>
+                  </h2>
+                  <p className="text-slate-300 text-lg lg:text-xl leading-relaxed mb-8 font-light">
+                    2008 yılından bu yana Volkswagen, Seat, Skoda, Audi ve Fiat markalarında uzmanlaşmış ekibimizle
+                    binlerce müşterimize hizmet verdik. Yetkili servis kalitesinde hizmet anlayışımız ve müşteri
+                    memnuniyeti odaklı yaklaşımımızla sektörde öncü konumdayız.
+                  </p>
+                </div>
 
-            <div className="mt-16 text-center">
-              <div className="grid md:grid-cols-4 gap-8">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-yellow-400 mb-2">5</div>
-                  <div className="text-gray-300">Premium Marka</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-yellow-400 mb-2">50+</div>
-                  <div className="text-gray-300">Model Desteği</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-yellow-400 mb-2">100%</div>
-                  <div className="text-gray-300">Orjinal Parça</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-yellow-400 mb-2">24/7</div>
-                  <div className="text-gray-300">Destek Hattı</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* About Us Section */}
-        <section className="py-24 bg-white">
-          <div className="container px-4">
-            <div className="text-center space-y-6 mb-20">
-              <Badge className="bg-gradient-to-r from-blue-100 to-green-100 text-blue-800 text-lg px-6 py-2">
-                Hakkımızda
-              </Badge>
-              <h2 className="text-4xl lg:text-6xl font-bold text-gray-900">
-                Biz <span className="text-blue-600">Kimiz?</span>
-              </h2>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
-              <div className="space-y-6">
-                <h3 className="text-3xl font-bold text-gray-900">15+ Yıllık Deneyim</h3>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  2008 yılından bu yana otomotiv sektöründe faaliyet gösteren AutoExpert, Volkswagen Group ve Fiat
-                  markalarında uzmanlaşmış bir ekiple hizmet vermektedir. Müşteri memnuniyetini ön planda tutan
-                  yaklaşımımız ve kaliteli hizmet anlayışımızla sektörde öncü konumdayız.
-                </p>
-                <p className="text-lg text-gray-600 leading-relaxed">
-                  Son teknoloji ekipmanlarımız, orjinal parça garantimiz ve sürekli kendini geliştiren uzman kadromuzla
-                  aracınızın tüm ihtiyaçlarına çözüm üretiyoruz.
-                </p>
-                <div className="grid grid-cols-2 gap-6 pt-4">
-                  <div className="text-center p-4 bg-blue-50 rounded-xl">
-                    <div className="text-3xl font-bold text-blue-600 mb-2">1000+</div>
-                    <div className="text-gray-600">Başarılı Onarım</div>
-                  </div>
-                  <div className="text-center p-4 bg-green-50 rounded-xl">
-                    <div className="text-3xl font-bold text-green-600 mb-2">%98</div>
-                    <div className="text-gray-600">Müşteri Memnuniyeti</div>
-                  </div>
-                </div>
-              </div>
-              <div className="relative">
-                <Image
-                  src="/placeholder.svg?height=500&width=600"
-                  alt="AutoExpert Servis Ekibi"
-                  width={600}
-                  height={500}
-                  className="rounded-2xl shadow-2xl"
-                />
-                <div className="absolute -bottom-6 -right-6 bg-gradient-to-r from-blue-600 to-purple-600 p-6 rounded-2xl text-white shadow-xl">
+                <div className="grid grid-cols-2 gap-8 lg:gap-10">
                   <div className="text-center">
-                    <div className="text-2xl font-bold">15+</div>
-                    <div className="text-sm">Yıl Deneyim</div>
+                    <div className="text-4xl lg:text-5xl font-bold text-slate-200 mb-3">15+</div>
+                    <div className="text-slate-400 font-medium">Yıl Deneyim</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl lg:text-5xl font-bold text-slate-200 mb-3">2500+</div>
+                    <div className="text-slate-400 font-medium">Servis Edilen Araç</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl lg:text-5xl font-bold text-slate-200 mb-3">%99</div>
+                    <div className="text-slate-400 font-medium">Müşteri Memnuniyeti</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-4xl lg:text-5xl font-bold text-slate-200 mb-3">5</div>
+                    <div className="text-slate-400 font-medium">Uzman Marka</div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Mission & Vision */}
-            <div className="grid md:grid-cols-2 gap-12">
-              <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-0 shadow-lg hover:shadow-xl transition-shadow">
-                <CardHeader className="text-center pb-8">
-                  <div className="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <TrendingUp className="h-8 w-8 text-white" />
-                  </div>
-                  <CardTitle className="text-3xl font-bold text-gray-900 mb-4">Misyonumuz</CardTitle>
-                </CardHeader>
-                <CardContent className="text-center px-8 pb-8">
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    Otomotiv sektöründe en yüksek kalite standartlarında hizmet sunarak, müşterilerimizin araçlarının
-                    güvenliğini ve performansını maksimum düzeyde tutmak. Sürekli gelişim ve yenilikçi yaklaşımlarla
-                    sektörde öncü olmaya devam etmek.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-gradient-to-br from-purple-50 to-purple-100 border-0 shadow-lg hover:shadow-xl transition-shadow">
-                <CardHeader className="text-center pb-8">
-                  <div className="bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <Sparkles className="h-8 w-8 text-white" />
-                  </div>
-                  <CardTitle className="text-3xl font-bold text-gray-900 mb-4">Vizyonumuz</CardTitle>
-                </CardHeader>
-                <CardContent className="text-center px-8 pb-8">
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    {"Türkiye'nin"} en güvenilir ve tercih edilen premium otomotiv servis merkezi olmak. Teknolojik
-                    gelişmeleri yakından takip ederek, müşterilerimize her zaman en iyi hizmeti sunmak ve otomotiv
-                    sektöründe kalite standardını belirleyen marka olmak.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Values */}
-            <div className="mt-20">
-              <div className="text-center mb-12">
-                <h3 className="text-3xl font-bold text-gray-900 mb-4">Değerlerimiz</h3>
-                <p className="text-lg text-gray-600">Çalışma prensiplerimizi oluşturan temel değerler</p>
-              </div>
-
-              <div className="grid md:grid-cols-4 gap-8">
-                <div className="text-center group">
-                  <div className="bg-gradient-to-br from-red-500 to-pink-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <Heart className="h-8 w-8 text-white" />
-                  </div>
-                  <h4 className="font-bold text-lg text-gray-900 mb-2">Güvenilirlik</h4>
-                  <p className="text-gray-600 text-sm">
-                    Sözümüzün arkasında durur, verdiğimiz garantileri yerine getiririz
-                  </p>
-                </div>
-
-                <div className="text-center group">
-                  <div className="bg-gradient-to-br from-green-500 to-emerald-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <CheckCircle className="h-8 w-8 text-white" />
-                  </div>
-                  <h4 className="font-bold text-lg text-gray-900 mb-2">Kalite</h4>
-                  <p className="text-gray-600 text-sm">
-                    Her işimizde mükemmellik arayışı ve en yüksek kalite standartları
-                  </p>
-                </div>
-
-                <div className="text-center group">
-                  <div className="bg-gradient-to-br from-blue-500 to-cyan-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <Users className="h-8 w-8 text-white" />
-                  </div>
-                  <h4 className="font-bold text-lg text-gray-900 mb-2">Müşteri Odaklılık</h4>
-                  <p className="text-gray-600 text-sm">Müşteri memnuniyeti bizim için her şeyden önce gelir</p>
-                </div>
-
-                <div className="text-center group">
-                  <div className="bg-gradient-to-br from-yellow-500 to-orange-500 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                    <Lightning className="h-8 w-8 text-white" />
-                  </div>
-                  <h4 className="font-bold text-lg text-gray-900 mb-2">Yenilikçilik</h4>
-                  <p className="text-gray-600 text-sm">Sürekli gelişim ve teknolojik yenilikleri takip etme</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Gallery Section */}
-        <section id="galeri" className="py-24 bg-white">
-          <div className="container px-4">
-            <div className="text-center space-y-6 mb-20">
-              <Badge className="bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800 text-lg px-6 py-2">
-                Çalışmalarımız
-              </Badge>
-              <h2 className="text-4xl lg:text-6xl font-bold text-gray-900">
-                Öncesi & <span className="text-purple-600">Sonrası</span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Yaptığımız işlerin kalitesini gözlerinizle görün
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3, 4, 5, 6].map((item) => (
-                <Card key={item} className="group overflow-hidden hover:shadow-2xl transition-all duration-500">
-                  <div className="relative">
-                    <Image
-                      src="/placeholder.svg?height=300&width=400"
-                      alt={`Çalışma ${item}`}
-                      width={400}
-                      height={300}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute bottom-4 left-4 text-white">
-                        <p className="font-semibold">Kaporta & Boya</p>
-                        <p className="text-sm">Volkswagen Golf</p>
+                <div className="space-y-4 lg:space-y-5">
+                  {[
+                    "Orjinal ve OEM kalitesinde yedek parça garantisi",
+                    "Marka sertifikalı uzman teknisyen kadrosu",
+                    "Son teknoloji teşhis ve onarım ekipmanları",
+                    "Şeffaf fiyatlandırma ve detaylı raporlama",
+                    "7/24 müşteri destek hizmetleri",
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center space-x-4">
+                      <div className="bg-gradient-to-br from-slate-700 to-slate-800 p-1 rounded-full">
+                        <CheckCircle className="h-5 w-5 text-slate-300" />
                       </div>
+                      <span className="text-slate-300 font-medium">{item}</span>
                     </div>
-                    <Button
-                      size="sm"
-                      className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <Camera className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </Card>
-              ))}
-            </div>
+                  ))}
+                </div>
+              </div>
 
-            <div className="text-center mt-12">
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-              >
-                Tüm Galeriyi Görüntüle
-                <ArrowRight className="h-5 w-5 ml-2" />
-              </Button>
+              <div className="relative">
+                <div className="relative z-10">
+                  <div className="absolute inset-0 bg-gradient-to-br from-slate-700/20 to-slate-800/20 rounded-3xl blur-2xl transform -rotate-6"></div>
+                  <Image
+                    src="/placeholder.svg?height=500&width=600"
+                    alt="Alkay Grup Otomotiv Servisi"
+                    width={600}
+                    height={500}
+                    className="relative w-full h-auto rounded-3xl shadow-2xl border border-slate-700/30"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Testimonials Section */}
-        <section id="yorumlar" className="py-24 bg-gradient-to-br from-blue-50 to-purple-50">
-          <div className="container px-4">
-            <div className="text-center space-y-6 mb-20">
-              <Badge className="bg-gradient-to-r from-green-100 to-blue-100 text-green-800 text-lg px-6 py-2">
-                Müşteri Yorumları
+        <section id="yorumlar" className="py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-slate-50 to-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center space-y-6 lg:space-y-8 mb-16 lg:mb-24">
+              <Badge className="bg-gradient-to-r from-slate-100 to-slate-200 text-slate-800 px-6 py-3 text-sm font-semibold border border-slate-300/50">
+                Müşteri Deneyimleri
               </Badge>
-              <h2 className="text-4xl lg:text-6xl font-bold text-gray-900">
-                Müşterilerimiz <span className="text-blue-600">Ne Diyor?</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent tracking-tight">
+                Müşterilerimizin Görüşleri
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Binlerce mutlu müşterimizden bazılarının deneyimleri
+              <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-light">
+                Hizmet kalitemiz ve müşteri memnuniyetimiz hakkında gerçek müşteri deneyimleri
               </p>
             </div>
 
-            <div className="max-w-4xl mx-auto">
-              <Card className="bg-white/80 backdrop-blur-sm border-0 shadow-2xl">
-                <CardContent className="p-12">
-                  <div className="text-center space-y-6">
-                    <Quote className="h-16 w-16 text-blue-600 mx-auto opacity-50" />
-
-                    <div className="space-y-4">
-                      <p className="text-2xl text-gray-700 leading-relaxed italic">
-                        {`"${testimonials[activeTestimonial].content}"`}
-                      </p>
-
-                      <div className="flex justify-center space-x-1">
-                        {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                          <Star key={i} className="h-6 w-6 text-yellow-400 fill-current" />
-                        ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+              {[
+                {
+                  name: "Mehmet Yılmaz",
+                  car: "Volkswagen Golf GTI",
+                  rating: 5,
+                  comment:
+                    "DSG şanzıman arızam için geldim. Hem fiyat hem de hizmet kalitesi mükemmeldi. Orjinal parça kullanmaları ve 2 yıl garanti vermeleri çok güven verici. Kesinlikle tavsiye ederim.",
+                  avatar: "MY",
+                },
+                {
+                  name: "Ayşe Demir",
+                  car: "Audi A3 Sportback",
+                  rating: 5,
+                  comment:
+                    "Elektronik arıza tespiti için gittim. Çok profesyonel yaklaştılar ve sorunu hızlıca tespit edip çözdüler. Teknisyenleri gerçekten işinin ehli. Fiyatları da çok makul.",
+                  avatar: "AD",
+                },
+                {
+                  name: "Can Özkan",
+                  car: "Seat Leon Cupra",
+                  rating: 5,
+                  comment:
+                    "Kaporta boyası için geldim. İşçilik kalitesi ve müşteri memnuniyeti odaklı yaklaşımları harika. Araç teslim edildiğinde sıfır gibi olmuştu. Çok memnun kaldım.",
+                  avatar: "CÖ",
+                },
+              ].map((testimonial, index) => (
+                <Card
+                  key={index}
+                  className="hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 shadow-lg"
+                >
+                  <CardContent className="p-8">
+                    <div className="flex items-center space-x-1 mb-6">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="h-5 w-5 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <p className="text-slate-600 mb-6 italic leading-relaxed font-light text-base">
+                      "{testimonial.comment}"
+                    </p>
+                    <div className="flex items-center space-x-4">
+                      <div className="bg-gradient-to-br from-slate-700 to-slate-800 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold">
+                        {testimonial.avatar}
+                      </div>
+                      <div>
+                        <p className="font-bold text-slate-900 text-lg">{testimonial.name}</p>
+                        <p className="text-slate-600 font-medium">{testimonial.car}</p>
                       </div>
                     </div>
-
-                    <div className="flex items-center justify-center space-x-4">
-                      <Image
-                        src={testimonials[activeTestimonial].image || "/placeholder.svg"}
-                        alt={testimonials[activeTestimonial].name}
-                        width={60}
-                        height={60}
-                        className="rounded-full"
-                      />
-                      <div className="text-left">
-                        <p className="font-bold text-gray-900">{testimonials[activeTestimonial].name}</p>
-                        <p className="text-gray-600">{testimonials[activeTestimonial].role}</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <div className="flex justify-center space-x-2 mt-8">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all ${
-                      index === activeTestimonial ? "bg-blue-600 w-8" : "bg-gray-300"
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-4 gap-8 mt-20">
-              <div className="text-center">
-                <div className="bg-white rounded-2xl p-6 shadow-lg">
-                  <ThumbsUp className="h-12 w-12 text-green-500 mx-auto mb-4" />
-                  <div className="text-3xl font-bold text-gray-900 mb-2">%98</div>
-                  <div className="text-gray-600">Memnuniyet Oranı</div>
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="bg-white rounded-2xl p-6 shadow-lg">
-                  <Heart className="h-12 w-12 text-red-500 mx-auto mb-4" />
-                  <div className="text-3xl font-bold text-gray-900 mb-2">1000+</div>
-                  <div className="text-gray-600">Mutlu Müşteri</div>
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="bg-white rounded-2xl p-6 shadow-lg">
-                  <Star className="h-12 w-12 text-yellow-500 mx-auto mb-4" />
-                  <div className="text-3xl font-bold text-gray-900 mb-2">4.9</div>
-                  <div className="text-gray-600">Google Puanı</div>
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="bg-white rounded-2xl p-6 shadow-lg">
-                  <TrendingUp className="h-12 w-12 text-blue-500 mx-auto mb-4" />
-                  <div className="text-3xl font-bold text-gray-900 mb-2">%95</div>
-                  <div className="text-gray-600">Tekrar Tercih</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section className="py-24 bg-white">
-          <div className="container px-4">
-            <div className="text-center space-y-6 mb-20">
-              <Badge className="bg-gradient-to-r from-orange-100 to-red-100 text-orange-800 text-lg px-6 py-2">
-                Sıkça Sorulan Sorular
-              </Badge>
-              <h2 className="text-4xl lg:text-6xl font-bold text-gray-900">
-                Merak <span className="text-orange-600">Ettikleriniz</span>
-              </h2>
-            </div>
-
-            <div className="max-w-3xl mx-auto space-y-4">
-              {faqs.map((faq, index) => (
-                <Card key={index} className="border-2 hover:border-orange-200 transition-colors">
-                  <CardHeader className="cursor-pointer" onClick={() => setOpenFaq(openFaq === index ? null : index)}>
-                    <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-semibold text-gray-900">{faq.question}</h3>
-                      <ChevronDown
-                        className={`h-5 w-5 text-gray-500 transition-transform ${
-                          openFaq === index ? "rotate-180" : ""
-                        }`}
-                      />
-                    </div>
-                  </CardHeader>
-                  {openFaq === index && (
-                    <CardContent className="pt-0">
-                      <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-                    </CardContent>
-                  )}
+                  </CardContent>
                 </Card>
               ))}
             </div>
@@ -761,250 +621,119 @@ export default function HomePage() {
         {/* Contact Section */}
         <section
           id="iletisim"
-          className="py-24 bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 text-white relative overflow-hidden"
+          className="py-20 sm:py-24 lg:py-32 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden"
         >
-          {/* Background Effects */}
           <div className="absolute inset-0 bg-[url('/placeholder.svg?height=1080&width=1920')] bg-cover bg-center opacity-5"></div>
+          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-slate-700/20 to-transparent rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-tl from-slate-600/20 to-transparent rounded-full blur-3xl"></div>
 
-          <div className="container px-4 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              <div className="space-y-8">
-                <div className="space-y-6">
-                  <Badge className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black text-lg px-6 py-2">
-                    İletişim
-                  </Badge>
-                  <h2 className="text-4xl lg:text-6xl font-bold leading-tight">
-                    Hemen <span className="text-yellow-400">İletişime</span> Geçin
-                  </h2>
-                  <p className="text-xl text-blue-100 leading-relaxed">
-                    Aracınızın bakım ve onarım ihtiyaçları için uzman ekibimizle iletişime geçin.
-                    <span className="text-yellow-400 font-semibold"> Ücretsiz ön değerlendirme</span> ve detaylı bilgi
-                    için bizi arayın.
-                  </p>
-                </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center space-y-6 lg:space-y-8 mb-16 lg:mb-24">
+              <Badge className="bg-gradient-to-r from-slate-700/80 to-slate-800/80 backdrop-blur-sm text-slate-200 px-6 py-3 border border-slate-600/30">
+                İletişim
+              </Badge>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+                Hemen <span className="text-slate-300">İletişime</span> Geçin
+              </h2>
+              <p className="text-slate-300 max-w-3xl mx-auto text-lg lg:text-xl leading-relaxed font-light">
+                Aracınız için ücretsiz ön değerlendirme ve detaylı bilgi almak için profesyonel ekibimizle iletişime
+                geçin
+              </p>
+            </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                    <CardContent className="p-6">
-                      <Phone className="h-8 w-8 text-yellow-400 mb-4" />
-                      <h3 className="font-bold text-lg mb-2">Telefon</h3>
-                      <p className="text-blue-100">+90 (212) 555 0123</p>
-                      <p className="text-sm text-gray-300 mt-1">7/24 Acil Servis</p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                    <CardContent className="p-6">
-                      <MessageCircle className="h-8 w-8 text-green-400 mb-4" />
-                      <h3 className="font-bold text-lg mb-2">WhatsApp</h3>
-                      <p className="text-blue-100">+90 (555) 123 4567</p>
-                      <p className="text-sm text-gray-300 mt-1">Anında Yanıt</p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                    <CardContent className="p-6">
-                      <MapPin className="h-8 w-8 text-red-400 mb-4" />
-                      <h3 className="font-bold text-lg mb-2">Adres</h3>
-                      <p className="text-blue-100">Örnek Mahallesi</p>
-                      <p className="text-blue-100">Otomotiv Caddesi No:123</p>
-                      <p className="text-blue-100">İstanbul</p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                    <CardContent className="p-6">
-                      <Clock className="h-8 w-8 text-blue-400 mb-4" />
-                      <h3 className="font-bold text-lg mb-2">Çalışma Saatleri</h3>
-                      <p className="text-blue-100">Pazartesi - Cumartesi</p>
-                      <p className="text-blue-100">08:00 - 18:00</p>
-                      <p className="text-sm text-gray-300 mt-1">Pazar Kapalı</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-
-              <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-2xl">
-                <CardHeader className="text-center pb-8">
-                  <h3 className="text-3xl font-bold text-gray-900 mb-2">Premium Randevu</h3>
-                  <p className="text-gray-600">Özel hizmet için randevunuzu alın</p>
-                </CardHeader>
-                <CardContent className="p-8">
-                  <form className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">Ad Soyad *</label>
-                        <input
-                          type="text"
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                          placeholder="Adınız ve soyadınız"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">Telefon *</label>
-                        <input
-                          type="tel"
-                          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                          placeholder="Telefon numaranız"
-                        />
-                      </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+              {[
+                {
+                  icon: Phone,
+                  title: "Telefon",
+                  info: "+90 (212) 555 0123",
+                  color: "from-slate-700 to-slate-800",
+                },
+                {
+                  icon: MessageCircle,
+                  title: "WhatsApp",
+                  info: "+90 (555) 123 4567",
+                  color: "from-green-600 to-green-700",
+                },
+                {
+                  icon: MapPin,
+                  title: "Adres",
+                  info: "İstanbul / Türkiye",
+                  color: "from-red-600 to-red-700",
+                },
+                {
+                  icon: Clock,
+                  title: "Çalışma Saatleri",
+                  info: "08:00 - 18:00",
+                  color: "from-blue-600 to-blue-700",
+                },
+              ].map((contact, index) => (
+                <Card
+                  key={index}
+                  className="bg-white/10 backdrop-blur-xl border border-slate-700/30 hover:bg-white/15 transition-all duration-300 transform hover:-translate-y-2 shadow-xl"
+                >
+                  <CardContent className="p-6 lg:p-8 text-center">
+                    <div
+                      className={`bg-gradient-to-br ${contact.color} w-14 h-14 lg:w-16 lg:h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-lg`}
+                    >
+                      <contact.icon className="h-7 w-7 lg:h-8 lg:w-8 text-white" />
                     </div>
+                    <h3 className="font-bold text-lg lg:text-xl mb-3 text-slate-100">{contact.title}</h3>
+                    <p className="text-slate-300 text-sm lg:text-base font-medium">{contact.info}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
 
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">Araç Markası *</label>
-                        <select className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                          <option>Marka seçiniz</option>
-                          <option>Volkswagen</option>
-                          <option>Seat</option>
-                          <option>Škoda</option>
-                          <option>Audi</option>
-                          <option>Fiat</option>
-                        </select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">Hizmet Türü *</label>
-                        <select className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all">
-                          <option>Hizmet türü seçiniz</option>
-                          <option>Mekanik Onarım</option>
-                          <option>Elektrik Sistemleri</option>
-                          <option>Kaporta & Boya</option>
-                          <option>DSG Şanzıman</option>
-                          <option>Parça Temini</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">Tercih Edilen Tarih</label>
-                      <input
-                        type="date"
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">Detaylı Açıklama</label>
-                      <textarea
-                        rows={4}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
-                        placeholder="Aracınızın durumu ve ihtiyaçlarınız hakkında detay veriniz..."
-                      ></textarea>
-                    </div>
-
-                    <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 text-lg font-semibold shadow-lg">
-                      <Calendar className="h-5 w-5 mr-2" />
-                      Premium Randevu Al
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
+            <div className="mt-16 lg:mt-20 text-center">
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-slate-700 to-slate-800 hover:from-slate-800 hover:to-slate-900 text-white font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300 px-8 py-4 text-lg"
+              >
+                <Calendar className="h-5 w-5 mr-3" />
+                Ücretsiz Ön Değerlendirme Talep Et
+              </Button>
             </div>
           </div>
         </section>
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="container px-4">
-          <div className="grid md:grid-cols-5 gap-8 mb-12">
-            <div className="md:col-span-2 space-y-6">
-              <div className="flex items-center space-x-3">
-                <div className="bg-gradient-to-br from-blue-600 to-purple-600 p-2 rounded-xl">
-                  <Car className="h-8 w-8 text-white" />
-                </div>
-                <div>
-                  <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                    AutoExpert
-                  </span>
-                  <p className="text-xs text-gray-400 -mt-1">Premium Servis</p>
-                </div>
+      <footer className="bg-slate-900 text-white py-16 lg:py-20 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="flex items-center justify-center space-x-4 mb-6">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-800 rounded-xl blur-sm opacity-50"></div>
+                <Image
+                  src="/images/alkay-grup-logo.png"
+                  alt="Alkay Grup Logo"
+                  width={40}
+                  height={40}
+                  className="relative h-8 w-8 lg:h-10 lg:w-10 object-contain"
+                />
               </div>
-              <p className="text-gray-400 leading-relaxed max-w-md">
-                15+ yıllık deneyimimiz ve son teknoloji ekipmanlarımızla Volkswagen, Seat, Skoda, Audi ve Fiat
-                markalarında premium otomotiv servisi sunuyoruz.
+              <span className="text-2xl lg:text-3xl font-bold tracking-wide">ALKAY GRUP</span>
+            </div>
+            <p className="text-slate-400 mb-8 lg:mb-10 text-base lg:text-lg font-light">
+              Premium Otomotiv Servisi - Yetkili Servis Kalitesinde Hizmet
+            </p>
+            <div className="border-t border-slate-800 pt-8">
+              <p className="text-slate-500 text-sm lg:text-base">
+                &copy; 2024 Alkay Grup Otomotiv Servisi. Tüm hakları saklıdır.
               </p>
-              <div className="flex space-x-4">
-                <Button size="sm" variant="outline" className="border-gray-600 text-gray-400 hover:text-white">
-                  <Globe className="h-4 w-4" />
-                </Button>
-                <Button size="sm" variant="outline" className="border-gray-600 text-gray-400 hover:text-white">
-                  <Smartphone className="h-4 w-4" />
-                </Button>
-                <Button size="sm" variant="outline" className="border-gray-600 text-gray-400 hover:text-white">
-                  <Mail className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-lg mb-6 text-white">Hizmetlerimiz</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li className="hover:text-white transition-colors cursor-pointer">Mekanik Onarım</li>
-                <li className="hover:text-white transition-colors cursor-pointer">Elektrik Sistemleri</li>
-                <li className="hover:text-white transition-colors cursor-pointer">Kaporta & Boya</li>
-                <li className="hover:text-white transition-colors cursor-pointer">DSG Şanzıman</li>
-                <li className="hover:text-white transition-colors cursor-pointer">Orjinal Parça</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-lg mb-6 text-white">Markalar</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li className="hover:text-white transition-colors cursor-pointer">Volkswagen</li>
-                <li className="hover:text-white transition-colors cursor-pointer">Seat</li>
-                <li className="hover:text-white transition-colors cursor-pointer">Škoda</li>
-                <li className="hover:text-white transition-colors cursor-pointer">Audi</li>
-                <li className="hover:text-white transition-colors cursor-pointer">Fiat</li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-lg mb-6 text-white">İletişim</h4>
-              <ul className="space-y-3 text-gray-400">
-                <li className="flex items-center space-x-2">
-                  <Phone className="h-4 w-4" />
-                  <span>+90 (212) 555 0123</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <Mail className="h-4 w-4" />
-                  <span>info@autoexpert.com</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <MapPin className="h-4 w-4 mt-1" />
-                  <span>
-                    Örnek Mah. Otomotiv Cad. No:123
-                    <br />
-                    İstanbul, Türkiye
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="border-t border-gray-800 pt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <p className="text-gray-400">&copy; 2024 AutoExpert Premium Servis. Tüm hakları saklıdır.</p>
-              <div className="flex space-x-6 text-sm text-gray-400">
-                <Link href="#" className="hover:text-white transition-colors">
-                  Gizlilik Politikası
-                </Link>
-                <Link href="#" className="hover:text-white transition-colors">
-                  Kullanım Şartları
-                </Link>
-                <Link href="#" className="hover:text-white transition-colors">
-                  Çerez Politikası
-                </Link>
-              </div>
             </div>
           </div>
         </div>
       </footer>
 
       {/* Floating WhatsApp Button */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <Button size="lg" className="bg-green-500 hover:bg-green-600 rounded-full w-16 h-16 shadow-2xl animate-pulse">
-          <MessageCircle className="h-8 w-8" />
+      <div className="fixed bottom-6 right-6 lg:bottom-8 lg:right-8 z-50">
+        <Button
+          size="lg"
+          className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 rounded-full w-14 h-14 lg:w-16 lg:h-16 shadow-2xl animate-pulse hover:animate-none transform hover:scale-110 transition-all duration-300"
+        >
+          <MessageCircle className="h-7 w-7 lg:h-8 lg:w-8" />
         </Button>
       </div>
     </div>
