@@ -294,7 +294,7 @@ export default function HomePage() {
                 Uzman Olduğumuz Markalar
               </Badge>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 bg-clip-text text-transparent tracking-tight">
-                Avrupa'nın Prestijli Markaları
+                Avrupa&apos;nın Prestijli Markaları
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed font-light">
                 Her marka için özel eğitim almış sertifikalı teknisyenlerimiz ve orijinal yedek parça ağımız ile
@@ -569,7 +569,7 @@ export default function HomePage() {
                   car: "Volkswagen Golf GTI",
                   rating: 5,
                   comment:
-                    "DSG şanzıman arızam için geldim. Hem fiyat hem de hizmet kalitesi mükemmeldi. Orjinal parça kullanmaları ve 2 yıl garanti vermeleri çok güven verici. Kesinlikle tavsiye ederim.",
+                    "&ldquo;DSG şanzıman arızam için geldim. Hem fiyat hem de hizmet kalitesi mükemmeldi. Orjinal parça kullanmaları ve 2 yıl garanti vermeleri çok güven verici. Kesinlikle tavsiye ederim.&rdquo;",
                   avatar: "MY",
                 },
                 {
@@ -577,7 +577,7 @@ export default function HomePage() {
                   car: "Audi A3 Sportback",
                   rating: 5,
                   comment:
-                    "Elektronik arıza tespiti için gittim. Çok profesyonel yaklaştılar ve sorunu hızlıca tespit edip çözdüler. Teknisyenleri gerçekten işinin ehli. Fiyatları da çok makul.",
+                    "&ldquo;Elektronik arıza tespiti için gittim. Çok profesyonel yaklaştılar ve sorunu hızlıca tespit edip çözdüler. Teknisyenleri gerçekten işinin ehli. Fiyatları da çok makul.&rdquo;",
                   avatar: "AD",
                 },
                 {
@@ -585,7 +585,7 @@ export default function HomePage() {
                   car: "Seat Leon Cupra",
                   rating: 5,
                   comment:
-                    "Kaporta boyası için geldim. İşçilik kalitesi ve müşteri memnuniyeti odaklı yaklaşımları harika. Araç teslim edildiğinde sıfır gibi olmuştu. Çok memnun kaldım.",
+                    "&ldquo;Kaporta boyası için geldim. İşçilik kalitesi ve müşteri memnuniyeti odaklı yaklaşımları harika. Araç teslim edildiğinde sıfır gibi olmuştu. Çok memnun kaldım.&rdquo;",
                   avatar: "CÖ",
                 },
               ].map((testimonial, index) => (
@@ -600,7 +600,7 @@ export default function HomePage() {
                       ))}
                     </div>
                     <p className="text-slate-600 mb-6 italic leading-relaxed font-light text-base">
-                      "{testimonial.comment}"
+                      {testimonial.comment}
                     </p>
                     <div className="flex items-center space-x-4">
                       <div className="bg-gradient-to-br from-slate-700 to-slate-800 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold">
