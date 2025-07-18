@@ -19,27 +19,16 @@ import {
   Star,
 } from "lucide-react"
 import Image from "next/image"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 export default function HomePage() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [activeBrand, setActiveBrand] = useState("volkswagen")
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
-      setMobileMenuOpen(false)
       setSidebarOpen(false)
     }
   }
@@ -413,7 +402,7 @@ export default function HomePage() {
                         </div>
                       </div>
                       <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6">
-                        Audi'nin premium teknolojileri için özel eğitim almış teknisyenlerimiz. Quattro sisteminden MMI
+                        Audinin premium teknolojileri için özel eğitim almış teknisyenlerimiz. Quattro sisteminden MMI
                         teknolojisine kadar tüm Audi özelliklerinde uzman hizmet.
                       </p>
                       <div className="grid grid-cols-2 gap-4">
@@ -443,7 +432,7 @@ export default function HomePage() {
                       {
                         icon: Gauge,
                         title: "VCDS Premium Teşhis",
-                        description: "Audi'ye özel gelişmiş teşhis sistemleri",
+                        description: "Audiye özel gelişmiş teşhis sistemleri",
                         features: ["MMI sistem kontrolü", "Quattro test prosedürleri", "LED/Matrix farlar"],
                       },
                       {
@@ -455,7 +444,7 @@ export default function HomePage() {
                       {
                         icon: Wrench,
                         title: "TFSI/TDI Motorlar",
-                        description: "Audi'nin güçlü motorları için özel servis",
+                        description: "Audinin güçlü motorları için özel servis",
                         features: ["Turbo bakım", "Karbon temizliği", "Performans optimizasyonu"],
                       },
                     ].map((service, index) => (
@@ -496,7 +485,7 @@ export default function HomePage() {
                         </div>
                       </div>
                       <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6">
-                        Seat'ın genç ve dinamik ruhu için özel hizmetler. Leon Cupra'dan Ibiza'ya kadar tüm Seat
+                        Seatın genç ve dinamik ruhu için özel hizmetler. Leon Cupradan Ibizaya kadar tüm Seat
                         modellerinde uzman kadromuzla hizmet veriyoruz.
                       </p>
                       <div className="grid grid-cols-2 gap-4">
@@ -538,7 +527,7 @@ export default function HomePage() {
                       {
                         icon: Wrench,
                         title: "TSI/TDI Seat Motorlar",
-                        description: "Seat'ın güçlü motor seçenekleri",
+                        description: "Seatın güçlü motor seçenekleri",
                         features: ["1.0 TSI", "1.5 TSI", "2.0 TDI bakımı"],
                       },
                     ].map((service, index) => (
@@ -579,8 +568,8 @@ export default function HomePage() {
                         </div>
                       </div>
                       <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6">
-                        Skoda'nın akıllı çözümleri ve pratik yaklaşımı için özel hizmetler. Octavia'dan Superb'e kadar
-                        tüm Skoda modellerinde deneyimli kadromuzla hizmet.
+                        Skodanın akıllı çözümleri ve pratik yaklaşımı için özel hizmetler. Octaviadan Superbe kadar tüm
+                        Skoda modellerinde deneyimli kadromuzla hizmet.
                       </p>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-green-50 p-3 sm:p-4 rounded-xl">
@@ -609,7 +598,7 @@ export default function HomePage() {
                       {
                         icon: Gauge,
                         title: "VCDS Skoda Teşhis",
-                        description: "Skoda'ya özel teşhis sistemleri",
+                        description: "Skodaya özel teşhis sistemleri",
                         features: ["Akıllı sistemler", "Infotainment kontrolü", "Sensör kalibrasyonu"],
                       },
                       {
@@ -621,7 +610,7 @@ export default function HomePage() {
                       {
                         icon: Wrench,
                         title: "TSI/TDI Skoda",
-                        description: "Skoda'nın verimli motorları",
+                        description: "Skodanın verimli motorları",
                         features: ["1.0 TSI", "1.5 TSI", "2.0 TDI"],
                       },
                     ].map((service, index) => (
@@ -662,8 +651,8 @@ export default function HomePage() {
                         </div>
                       </div>
                       <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6">
-                        Fiat'ın İtalyan tasarım anlayışı ve şehir otomobili uzmanlığı için özel hizmetler. 500'den
-                        Egea'ya kadar tüm Fiat modellerinde deneyimli ekibimizle hizmet.
+                        Fiatın İtalyan tasarım anlayışı ve şehir otomobili uzmanlığı için özel hizmetler. 500den Egeaya
+                        kadar tüm Fiat modellerinde deneyimli ekibimizle hizmet.
                       </p>
                       <div className="grid grid-cols-2 gap-4">
                         <div className="bg-green-50 p-3 sm:p-4 rounded-xl">
@@ -704,7 +693,7 @@ export default function HomePage() {
                       {
                         icon: Wrench,
                         title: "MultiJet/Fire Motorlar",
-                        description: "Fiat'ın güvenilir motorları",
+                        description: "Fiatın güvenilir motorları",
                         features: ["1.3 MultiJet", "1.4 Fire", "Motor bakımı"],
                       },
                     ].map((service, index) => (
@@ -863,7 +852,7 @@ export default function HomePage() {
                 Güvenilir Hizmet, <span className="text-green-800">Uzman Çözümler</span>
               </h2>
               <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-                2008 yılından bu yana Avrupa'nın prestijli otomotiv markalarında uzmanlaşmış, müşteri memnuniyetini ön
+                2008 yılından bu yana Avrupanın prestijli otomotiv markalarında uzmanlaşmış, müşteri memnuniyetini ön
                 planda tutmuş bir ekibiz.
               </p>
             </div>
@@ -872,7 +861,7 @@ export default function HomePage() {
               <div className="space-y-6 sm:space-y-8">
                 <div className="space-y-4 sm:space-y-6">
                   <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                    Neden Alkay Grup'u Tercih Etmelisiniz?
+                    Neden Alkay Grupu Tercih Etmelisiniz?
                   </h3>
 
                   <div className="space-y-4">
@@ -929,7 +918,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Misyon & Vizyon Section - BURAYA EKLE */}
+            {/* Misyon & Vizyon Section */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 mb-16 sm:mb-20">
               {/* Misyonumuz */}
               <div className="bg-gradient-to-br from-green-800 to-green-900 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 text-white">
@@ -942,7 +931,7 @@ export default function HomePage() {
                   </div>
 
                   <p className="text-green-100 text-base sm:text-lg leading-relaxed">
-                    Avrupa'nın prestijli otomotiv markalarında uzmanlaşarak, müşterilerimize yetkili servis kalitesinde
+                    Avrupanın prestijli otomotiv markalarında uzmanlaşarak, müşterilerimize yetkili servis kalitesinde
                     hizmet sunmak. Modern teknoloji ve deneyimli kadromuzla, her aracın ihtiyacına özel çözümler
                     üreterek müşteri memnuniyetini en üst seviyede tutmak.
                   </p>
@@ -975,7 +964,7 @@ export default function HomePage() {
                   </div>
 
                   <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
-                    Türkiye'de Avrupa otomotiv markalarının en güvenilir ve tercih edilen servisi olmak. Teknolojik
+                    Türkiyede Avrupa otomotiv markalarının en güvenilir ve tercih edilen servisi olmak. Teknolojik
                     gelişmeleri yakından takip ederek, sektörde öncü konumumuzu korumak ve müşterilerimize en iyi hizmet
                     deneyimini yaşatmak.
                   </p>
@@ -1050,7 +1039,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Mevcut istatistikler bölümü buradan devam eder */}
             <div className="bg-gray-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
                 <div className="text-center">
@@ -1238,7 +1226,7 @@ export default function HomePage() {
                   car: "Fiat Egea 2020",
                   rating: 5,
                   comment:
-                    "Fiat'ım için periyodik bakım yaptırdım. Autocom cihazı ile detaylı kontrol ettiler. Hangi parçaların değişmesi gerektiğini açık açık anlattılar. Şeffaf fiyatlandırma ve kaliteli hizmet.",
+                    "Fiatım için periyodik bakım yaptırdım. Autocom cihazı ile detaylı kontrol ettiler. Hangi parçaların değişmesi gerektiğini açık açık anlattılar. Şeffaf fiyatlandırma ve kaliteli hizmet.",
                   avatar: "AD",
                   service: "Periyodik Bakım",
                 },
@@ -1247,7 +1235,7 @@ export default function HomePage() {
                   car: "Volkswagen Passat 2017",
                   rating: 5,
                   comment:
-                    "Motor arızası vardı, çok endişeliydim. Alkay Grup'ta çok detaylı inceleme yaptılar. Sorunu bulup orjinal parça ile çözdüler. 1 yıldır hiç sorun yaşamadım. Güvenilir bir yer.",
+                    "Motor arızası vardı, çok endişeliydim. Alkay Grupta çok detaylı inceleme yaptılar. Sorunu bulup orjinal parça ile çözdüler. 1 yıldır hiç sorun yaşamadım. Güvenilir bir yer.",
                   avatar: "ZA",
                   service: "Motor Onarımı",
                 },
@@ -1294,7 +1282,7 @@ export default function HomePage() {
                     </div>
 
                     <p className="text-gray-600 mb-6 italic leading-relaxed text-sm sm:text-base">
-                      "{testimonial.comment}"
+                      &ldquo;{testimonial.comment}&rdquo;
                     </p>
 
                     <div className="flex items-center space-x-4">
@@ -1317,7 +1305,7 @@ export default function HomePage() {
                 <a href="https://wa.me/905070503333" target="_blank" rel="noopener noreferrer">
                   <Button className="bg-green-800 hover:bg-green-900 text-white font-semibold px-4 sm:px-6 py-2 sm:py-3 w-full sm:w-auto">
                     <MessageCircle className="h-4 w-4 mr-2" />
-                    WhatsApp'tan Yorum Yapın
+                    WhatsApptan Yorum Yapın
                   </Button>
                 </a>
                 <a href="mailto:alkaygrup@gmail.com">
