@@ -32,52 +32,6 @@ export default function HomePage() {
     }
   }
 
-  // SVG logoları için component'ler - Gerçek logolar
-  const VolkswagenLogo = () => (
-    <svg viewBox="0 0 100 100" className="h-full w-full">
-      <circle cx="50" cy="50" r="45" fill="#1E3A8A" stroke="#1E40AF" strokeWidth="2" />
-      <text x="50" y="35" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">
-        VW
-      </text>
-      <path d="M25 60 L50 40 L75 60 Z" fill="white" />
-    </svg>
-  )
-
-  const AudiLogo = () => (
-    <svg viewBox="0 0 100 100" className="h-full w-full">
-      <circle cx="25" cy="50" r="15" fill="none" stroke="#DC2626" strokeWidth="3" />
-      <circle cx="40" cy="50" r="15" fill="none" stroke="#DC2626" strokeWidth="3" />
-      <circle cx="60" cy="50" r="15" fill="none" stroke="#DC2626" strokeWidth="3" />
-      <circle cx="75" cy="50" r="15" fill="none" stroke="#DC2626" strokeWidth="3" />
-    </svg>
-  )
-
-  const SeatLogo = () => (
-    <svg viewBox="0 0 100 100" className="h-full w-full">
-      <rect x="20" y="30" width="60" height="40" rx="5" fill="#EF4444" stroke="#DC2626" strokeWidth="2" />
-      <text x="50" y="55" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">
-        SEAT
-      </text>
-    </svg>
-  )
-
-  const SkodaLogo = () => (
-    <svg viewBox="0 0 100 100" className="h-full w-full">
-      <circle cx="50" cy="50" r="40" fill="#059669" stroke="#047857" strokeWidth="2" />
-      <path d="M30 35 Q50 25 70 35 Q65 50 50 55 Q35 50 30 35 Z" fill="white" />
-      <circle cx="45" cy="42" r="3" fill="#059669" />
-    </svg>
-  )
-
-  const FiatLogo = () => (
-    <svg viewBox="0 0 100 100" className="h-full w-full">
-      <rect x="15" y="35" width="70" height="30" rx="15" fill="#7C2D12" stroke="#92400E" strokeWidth="2" />
-      <text x="50" y="55" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">
-        FIAT
-      </text>
-    </svg>
-  )
-
   const navigationItems = [
     { id: "anasayfa", label: "Anasayfa", icon: null },
     { id: "markalar", label: "Markalarımız", icon: ChevronRight },
@@ -90,14 +44,15 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white flex">
-      {/* Overlay for mobile sidebar */}
+      {/* Mobil sidebar overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         ></div>
       )}
-      {/* Sidebar Navigation - Mobile Responsive */}
+
+      {/* Sidebar Navigasyon */}
       <div
         className={`fixed left-0 top-0 h-full bg-white border-r border-gray-200 z-50 transition-all duration-300 ${
           sidebarOpen ? "w-80" : "w-0"
@@ -106,10 +61,13 @@ export default function HomePage() {
         <div className="p-4 sm:p-6 border-b border-gray-100">
           <div className="flex items-center space-x-3">
             <div className="relative">
-              {/* Geçici logo - gerçek logo yüklenene kadar */}
-              <div className="h-8 w-8 sm:h-10 sm:w-10 bg-green-800 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xs sm:text-sm">AG</span>
-              </div>
+              <Image
+                src="/images/alkay-grup-logo.png"
+                alt="Alkay Grup Logo"
+                width={40}
+                height={40}
+                className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
+              />
             </div>
             <div>
               <span className="text-lg sm:text-xl font-bold text-gray-900 tracking-tight">ALKAY GRUP</span>
@@ -159,9 +117,9 @@ export default function HomePage() {
         </nav>
       </div>
 
-      {/* Main Content Area */}
+      {/* Ana İçerik Alanı */}
       <div className="flex-1 lg:ml-80">
-        {/* Top Header Bar */}
+        {/* Üst Header Bar */}
         <header className="bg-white border-b border-gray-100 sticky top-0 z-40">
           <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4">
             <div className="flex items-center space-x-4">
@@ -190,11 +148,12 @@ export default function HomePage() {
             </div>
           </div>
         </header>
-        {/* Hero Section - YENİ GÖRSEL İLE GÜNCELLENDİ */}
+
+        {/* Hero Bölümü */}
         <section className="relative min-h-screen h-screen overflow-hidden">
           <div className="absolute inset-0">
             <Image
-              src="/images/hero-banner.png"
+              src="/images/hero-banner.jpg"
               alt="Alkay Grup - Avrupa Otomotiv Markalarında Uzman Servis"
               fill
               className="object-cover"
@@ -273,7 +232,8 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        {/* Brands Section */}
+
+        {/* Markalar Bölümü */}
         <section id="markalar" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 sm:space-y-6 mb-12 sm:mb-16">
@@ -290,15 +250,20 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Brand Tabs */}
+            {/* Marka Sekmeleri */}
             <div className="mb-8 sm:mb-12">
               <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-8">
                 {[
-                  { id: "volkswagen", name: "Volkswagen", color: "bg-green-800", LogoComponent: VolkswagenLogo },
-                  { id: "audi", name: "Audi", color: "bg-green-800", LogoComponent: AudiLogo },
-                  { id: "seat", name: "Seat", color: "bg-green-800", LogoComponent: SeatLogo },
-                  { id: "skoda", name: "Škoda", color: "bg-green-800", LogoComponent: SkodaLogo },
-                  { id: "fiat", name: "Fiat", color: "bg-green-800", LogoComponent: FiatLogo },
+                  {
+                    id: "volkswagen",
+                    name: "Volkswagen",
+                    color: "bg-green-800",
+                    logo: "/images/logos/volkswagen-logo.svg",
+                  },
+                  { id: "audi", name: "Audi", color: "bg-green-800", logo: "/images/logos/audi-logo.svg" },
+                  { id: "seat", name: "Seat", color: "bg-green-800", logo: "/images/logos/seat-logo.svg" },
+                  { id: "skoda", name: "Škoda", color: "bg-green-800", logo: "/images/logos/skoda-logo.svg" },
+                  { id: "fiat", name: "Fiat", color: "bg-green-800", logo: "/images/logos/fiat-logo.svg" },
                 ].map((brand) => (
                   <button
                     key={brand.id}
@@ -310,7 +275,13 @@ export default function HomePage() {
                     }`}
                   >
                     <div className="w-6 h-6 sm:w-8 sm:h-8">
-                      <brand.LogoComponent />
+                      <Image
+                        src={brand.logo || "/placeholder.svg"}
+                        alt={`${brand.name} Logo`}
+                        width={32}
+                        height={32}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                     <span className="font-semibold">{brand.name}</span>
                   </button>
@@ -318,15 +289,21 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Brand Content - Sadece Volkswagen'i gösteriyorum, diğerleri aynı kalacak */}
+            {/* Marka İçeriği - Volkswagen */}
             <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
               {activeBrand === "volkswagen" && (
                 <div className="p-6 sm:p-8 lg:p-12">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-8 sm:mb-12">
                     <div>
                       <div className="flex items-center space-x-4 mb-6">
-                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-2xl flex items-center justify-center">
-                          <VolkswagenLogo />
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-2xl flex items-center justify-center p-2">
+                          <Image
+                            src="/images/logos/volkswagen-logo.svg"
+                            alt="Volkswagen Logo"
+                            width={64}
+                            height={64}
+                            className="w-full h-full object-contain"
+                          />
                         </div>
                         <div>
                           <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Volkswagen</h3>
@@ -350,7 +327,7 @@ export default function HomePage() {
                     </div>
                     <div className="relative">
                       <Image
-                        src="/images/volkswagen-service.png"
+                        src="/images/volkswagen-service.jpg"
                         alt="Alkay Grup Volkswagen Uzman Servisi"
                         width={500}
                         height={400}
@@ -402,14 +379,20 @@ export default function HomePage() {
                 </div>
               )}
 
-              {/* Audi brand content section'ını ekle */}
+              {/* Audi İçeriği */}
               {activeBrand === "audi" && (
                 <div className="p-6 sm:p-8 lg:p-12">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-8 sm:mb-12">
                     <div>
                       <div className="flex items-center space-x-4 mb-6">
-                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-red-100 rounded-2xl flex items-center justify-center">
-                          <AudiLogo />
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-red-100 rounded-2xl flex items-center justify-center p-2">
+                          <Image
+                            src="/images/logos/audi-logo.svg"
+                            alt="Audi Logo"
+                            width={64}
+                            height={64}
+                            className="w-full h-full object-contain"
+                          />
                         </div>
                         <div>
                           <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Audi</h3>
@@ -441,73 +424,23 @@ export default function HomePage() {
                       />
                     </div>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                    {[
-                      {
-                        icon: Gauge,
-                        title: "VCDS & ODIS Teşhis",
-                        description: "Audi özel test cihazları ile detaylı arıza tespiti",
-                        features: [
-                          "VCDS profesyonel teşhis",
-                          "ODIS uyumlu sistem",
-                          "MMI sistem kontrolü",
-                          "Quattro sistem testi",
-                        ],
-                      },
-                      {
-                        icon: Settings,
-                        title: "TFSI Motor Uzmanı",
-                        description: "TFSI motorlar için özelleşmiş hizmetler",
-                        features: [
-                          "TFSI motor bakımı",
-                          "Turbo sistem onarımı",
-                          "Karbon temizliği",
-                          "Performans optimizasyonu",
-                        ],
-                      },
-                      {
-                        icon: Wrench,
-                        title: "Quattro Sistem",
-                        description: "Audi Quattro 4x4 sistemleri için özel hizmet",
-                        features: [
-                          "Quattro diferansiyel",
-                          "Torsen sistem bakımı",
-                          "Haldex servisi",
-                          "4x4 sistem kontrolü",
-                        ],
-                      },
-                    ].map((service, index) => (
-                      <Card key={index} className="hover:shadow-lg transition-all duration-300 border border-red-100">
-                        <CardContent className="p-4 sm:p-6">
-                          <div className="bg-red-100 w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4">
-                            <service.icon className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
-                          </div>
-                          <h4 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">{service.title}</h4>
-                          <p className="text-gray-600 text-xs sm:text-sm mb-4">{service.description}</p>
-                          <ul className="space-y-1">
-                            {service.features.map((feature, idx) => (
-                              <li key={idx} className="flex items-center space-x-2 text-xs sm:text-sm text-gray-600">
-                                <CheckCircle className="h-3 w-3 text-slate-700 flex-shrink-0" />
-                                <span>{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
                 </div>
               )}
 
-              {/* Seat brand content section'ını ekle */}
+              {/* Seat İçeriği */}
               {activeBrand === "seat" && (
                 <div className="p-6 sm:p-8 lg:p-12">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-8 sm:mb-12">
                     <div>
                       <div className="flex items-center space-x-4 mb-6">
-                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-red-100 rounded-2xl flex items-center justify-center">
-                          <SeatLogo />
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-red-100 rounded-2xl flex items-center justify-center p-2">
+                          <Image
+                            src="/images/logos/seat-logo.svg"
+                            alt="SEAT Logo"
+                            width={64}
+                            height={64}
+                            className="w-full h-full object-contain"
+                          />
                         </div>
                         <div>
                           <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Seat</h3>
@@ -515,97 +448,36 @@ export default function HomePage() {
                         </div>
                       </div>
                       <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6">
-                        SEAT araçlarınız için VCDS ve Autocom test cihazları ile sportif karaktere uygun hizmet. TSI
-                        motorlar, DSG şanzımanlar ve SEAT Connect sistemleri konusunda uzman kadromuz.
+                        SEAT araçlarınız için VCDS ve Autocom test cihazları ile sportif karaktere uygun hizmet.
                       </p>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-red-50 p-3 sm:p-4 rounded-xl">
-                          <div className="text-xl sm:text-2xl font-bold text-red-600 mb-1">250+</div>
-                          <div className="text-xs sm:text-sm text-gray-600">Servis Edilen SEAT</div>
-                        </div>
-                        <div className="bg-red-50 p-3 sm:p-4 rounded-xl">
-                          <div className="text-xl sm:text-2xl font-bold text-red-600 mb-1">%96</div>
-                          <div className="text-xs sm:text-sm text-gray-600">Başarı Oranı</div>
-                        </div>
-                      </div>
                     </div>
                     <div className="relative">
                       <Image
                         src="/images/seat-service.jpg"
-                        alt="Alkay Grup SEAT Uzman Servisi"
+                        alt="Alkay Grup Volkswagen Uzman Servisi"
                         width={500}
                         height={400}
                         className="rounded-2xl shadow-lg w-full h-auto"
                       />
                     </div>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                    {[
-                      {
-                        icon: Gauge,
-                        title: "VCDS & Autocom Teşhis",
-                        description: "SEAT özel test cihazları ile sportif performans testi",
-                        features: [
-                          "VCDS profesyonel teşhis",
-                          "Autocom multi-marka",
-                          "SEAT Connect kontrolü",
-                          "Sportif mod ayarları",
-                        ],
-                      },
-                      {
-                        icon: Settings,
-                        title: "TSI Motor & DSG",
-                        description: "SEAT TSI motorlar ve DSG şanzıman uzmanı",
-                        features: [
-                          "TSI motor bakımı",
-                          "DSG şanzıman servisi",
-                          "Turbo sistem onarımı",
-                          "Performans optimizasyonu",
-                        ],
-                      },
-                      {
-                        icon: Wrench,
-                        title: "Sportif Modifikasyon",
-                        description: "SEAT Cupra ve sportif modeller için özel hizmet",
-                        features: [
-                          "Cupra performans ayarı",
-                          "Sportif süspansiyon",
-                          "Fren sistem bakımı",
-                          "Egzoz sistem servisi",
-                        ],
-                      },
-                    ].map((service, index) => (
-                      <Card key={index} className="hover:shadow-lg transition-all duration-300 border border-red-100">
-                        <CardContent className="p-4 sm:p-6">
-                          <div className="bg-red-100 w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4">
-                            <service.icon className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
-                          </div>
-                          <h4 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">{service.title}</h4>
-                          <p className="text-gray-600 text-xs sm:text-sm mb-4">{service.description}</p>
-                          <ul className="space-y-1">
-                            {service.features.map((feature, idx) => (
-                              <li key={idx} className="flex items-center space-x-2 text-xs sm:text-sm text-gray-600">
-                                <CheckCircle className="h-3 w-3 text-slate-700 flex-shrink-0" />
-                                <span>{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
                 </div>
               )}
 
-              {/* ŠKODA brand content section'ını ekle - seat section'ından sonra */}
+              {/* Škoda İçeriği */}
               {activeBrand === "skoda" && (
                 <div className="p-6 sm:p-8 lg:p-12">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-8 sm:mb-12">
                     <div>
                       <div className="flex items-center space-x-4 mb-6">
-                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-2xl flex items-center justify-center">
-                          <SkodaLogo />
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-2xl flex items-center justify-center p-2">
+                          <Image
+                            src="/images/logos/skoda-logo.svg"
+                            alt="Škoda Logo"
+                            width={64}
+                            height={64}
+                            className="w-full h-full object-contain"
+                          />
                         </div>
                         <div>
                           <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Škoda</h3>
@@ -613,96 +485,36 @@ export default function HomePage() {
                         </div>
                       </div>
                       <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6">
-                        ŠKODA araçlarınız için VCDS ve Autocom test cihazları ile akıllı çözümler. TSI/TDI motorlar, DSG
-                        şanzımanlar ve ŠKODA Connect sistemleri konusunda uzman kadromuz.
+                        ŠKODA araçlarınız için VCDS ve Autocom test cihazları ile akıllı çözümler.
                       </p>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-green-50 p-3 sm:p-4 rounded-xl">
-                          <div className="text-xl sm:text-2xl font-bold text-green-600 mb-1">200+</div>
-                          <div className="text-xs sm:text-sm text-gray-600">Servis Edilen ŠKODA</div>
-                        </div>
-                        <div className="bg-green-50 p-3 sm:p-4 rounded-xl">
-                          <div className="text-xl sm:text-2xl font-bold text-green-600 mb-1">%95</div>
-                          <div className="text-xs sm:text-sm text-gray-600">Başarı Oranı</div>
-                        </div>
-                      </div>
                     </div>
                     <div className="relative">
                       <Image
                         src="/images/skoda-service.jpg"
-                        alt="Alkay Grup ŠKODA Uzman Servisi"
+                        alt="Alkay Grup Volkswagen Uzman Servisi"
                         width={500}
                         height={400}
                         className="rounded-2xl shadow-lg w-full h-auto"
                       />
                     </div>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                    {[
-                      {
-                        icon: Gauge,
-                        title: "VCDS & Autocom Teşhis",
-                        description: "ŠKODA özel test cihazları ile akıllı teşhis sistemi",
-                        features: [
-                          "VCDS profesyonel teşhis",
-                          "Autocom multi-marka",
-                          "ŠKODA Connect kontrolü",
-                          "Akıllı sistem testleri",
-                        ],
-                      },
-                      {
-                        icon: Settings,
-                        title: "TSI/TDI Motor Uzmanı",
-                        description: "ŠKODA TSI ve TDI motorlar için özelleşmiş hizmetler",
-                        features: [
-                          "TSI motor bakımı",
-                          "TDI dizel sistem",
-                          "DSG şanzıman servisi",
-                          "Turbo sistem onarımı",
-                        ],
-                      },
-                      {
-                        icon: Wrench,
-                        title: "Simply Clever Çözümler",
-                        description: "ŠKODA'nın akıllı çözümleri için özel hizmet",
-                        features: [
-                          "Akıllı park asistanı",
-                          "Fren sistem bakımı",
-                          "Süspansiyon servisi",
-                          "Elektrikli sistem kontrolü",
-                        ],
-                      },
-                    ].map((service, index) => (
-                      <Card key={index} className="hover:shadow-lg transition-all duration-300 border border-green-100">
-                        <CardContent className="p-4 sm:p-6">
-                          <div className="bg-green-100 w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4">
-                            <service.icon className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
-                          </div>
-                          <h4 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">{service.title}</h4>
-                          <p className="text-gray-600 text-xs sm:text-sm mb-4">{service.description}</p>
-                          <ul className="space-y-1">
-                            {service.features.map((feature, idx) => (
-                              <li key={idx} className="flex items-center space-x-2 text-xs sm:text-sm text-gray-600">
-                                <CheckCircle className="h-3 w-3 text-slate-700 flex-shrink-0" />
-                                <span>{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
                 </div>
               )}
 
+              {/* Fiat İçeriği */}
               {activeBrand === "fiat" && (
                 <div className="p-6 sm:p-8 lg:p-12">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-8 sm:mb-12">
                     <div>
                       <div className="flex items-center space-x-4 mb-6">
-                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-yellow-100 rounded-2xl flex items-center justify-center">
-                          <FiatLogo />
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-yellow-100 rounded-2xl flex items-center justify-center p-2">
+                          <Image
+                            src="/images/logos/fiat-logo.svg"
+                            alt="Fiat Logo"
+                            width={64}
+                            height={64}
+                            className="w-full h-full object-contain"
+                          />
                         </div>
                         <div>
                           <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">Fiat</h3>
@@ -710,99 +522,26 @@ export default function HomePage() {
                         </div>
                       </div>
                       <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6">
-                        FIAT araçlarınız için Autocom test cihazları ile ekonomik ve güvenilir çözümler. Multijet dizel
-                        motorlar, ticari araçlar ve FIAT Connect sistemleri konusunda uzman kadromuz ile İtalyan
-                        mühendisliğinin keyfini çıkarın.
+                        FIAT araçlarınız için Autocom test cihazları ile ekonomik ve güvenilir çözümler.
                       </p>
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-yellow-50 p-3 sm:p-4 rounded-xl">
-                          <div className="text-xl sm:text-2xl font-bold text-yellow-600 mb-1">150+</div>
-                          <div className="text-xs sm:text-sm text-gray-600">Servis Edilen Fiat</div>
-                        </div>
-                        <div className="bg-yellow-50 p-3 sm:p-4 rounded-xl">
-                          <div className="text-xl sm:text-2xl font-bold text-yellow-600 mb-1">%94</div>
-                          <div className="text-xs sm:text-sm text-gray-600">Başarı Oranı</div>
-                        </div>
-                      </div>
                     </div>
                     <div className="relative">
                       <Image
-                        src="/images/fiat-service.png"
-                        alt="Alkay Grup Fiat Uzman Servisi"
+                        src="/images/fiat-service.jpg"
+                        alt="Alkay Grup Volkswagen Uzman Servisi"
                         width={500}
                         height={400}
                         className="rounded-2xl shadow-lg w-full h-auto"
                       />
                     </div>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                    {[
-                      {
-                        icon: Gauge,
-                        title: "Autocom Teşhis Sistemi",
-                        description: "FIAT özel test cihazları ile ekonomik arıza tespiti",
-                        features: [
-                          "Autocom multi-marka teşhis",
-                          "FIAT Connect kontrolü",
-                          "Ekonomik sistem testleri",
-                          "Ticari araç uzmanı",
-                        ],
-                      },
-                      {
-                        icon: Settings,
-                        title: "Multijet Dizel Uzmanı",
-                        description: "FIAT Multijet motorlar için özelleşmiş hizmetler",
-                        features: [
-                          "Multijet motor bakımı",
-                          "Dizel enjektör temizliği",
-                          "Turbo sistem onarımı",
-                          "DPF filtre temizliği",
-                        ],
-                      },
-                      {
-                        icon: Wrench,
-                        title: "Ticari Araç Servisi",
-                        description: "FIAT ticari araçlar için özel hizmet",
-                        features: [
-                          "Ducato servis uzmanı",
-                          "Fiorino bakım servisi",
-                          "Doblo sistem kontrolü",
-                          "Ticari araç garantisi",
-                        ],
-                      },
-                    ].map((service, index) => (
-                      <Card
-                        key={index}
-                        className="hover:shadow-lg transition-all duration-300 border border-yellow-100"
-                      >
-                        <CardContent className="p-4 sm:p-6">
-                          <div className="bg-yellow-100 w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-4">
-                            <service.icon className="h-5 w-5 sm:h-6 sm:w-6 text-slate-700" />
-                          </div>
-                          <h4 className="font-bold text-gray-900 mb-2 text-sm sm:text-base">{service.title}</h4>
-                          <p className="text-gray-600 text-xs sm:text-sm mb-4">{service.description}</p>
-                          <ul className="space-y-1">
-                            {service.features.map((feature, idx) => (
-                              <li key={idx} className="flex items-center space-x-2 text-xs sm:text-sm text-gray-600">
-                                <CheckCircle className="h-3 w-3 text-slate-700 flex-shrink-0" />
-                                <span>{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
                 </div>
               )}
-
-              {/* Diğer markalar için aynı yapı devam eder... */}
-              {/* Kısalık için sadece Volkswagen'i gösterdim */}
             </div>
           </div>
         </section>
-        {/* Services Section */}
+
+        {/* Hizmetler Bölümü */}
         <section id="hizmetler" className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 sm:space-y-6 mb-12 sm:mb-16">
@@ -818,7 +557,6 @@ export default function HomePage() {
                 Modern ekipmanlarımız ve uzman kadromuzla hizmet veriyoruz.
               </p>
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
               {[
                 {
@@ -849,14 +587,14 @@ export default function HomePage() {
                   icon: Wrench,
                   title: "Motor Onarım & Bakım",
                   description: "TSI, TDI, TFSI motorlar için özel hizmetler",
-                  image: "/images/motor-onarim.png",
+                  image: "/images/motor-onarim.jpg",
                   features: ["Motor revizyonu", "Turbo sistem bakımı", "Enjektör temizliği", "1.5 TSI sente aparatı"],
                 },
                 {
                   icon: Settings,
                   title: "Klima Sistem Servisi",
                   description: "Tüm klima sistemleri için kapsamlı hizmet",
-                  image: "/images/klima-servis.jpg",
+                  image: "/images/klima-servis.jpeg",
                   features: [
                     "Klima arıza tespiti",
                     "R134a/R1234yf gaz dolumu",
@@ -896,11 +634,9 @@ export default function HomePage() {
                       <service.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                     </div>
                   </div>
-
                   <CardContent className="p-4 sm:p-6">
                     <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{service.title}</h3>
                     <p className="text-gray-600 mb-4 text-sm sm:text-base">{service.description}</p>
-
                     <div className="space-y-2">
                       <h4 className="font-semibold text-gray-900 text-sm mb-3">Hizmet Detayları:</h4>
                       <div className="grid grid-cols-1 gap-2">
@@ -918,7 +654,8 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        {/* About Section */}
+
+        {/* Hakkımızda Bölümü */}
         <section id="hakkimizda" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 sm:space-y-6 mb-12 sm:mb-16">
@@ -935,7 +672,6 @@ export default function HomePage() {
                 önceleyerek hizmet sunuyoruz.
               </p>
             </div>
-
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
               <div className="space-y-6">
                 <div className="space-y-4">
@@ -946,7 +682,6 @@ export default function HomePage() {
                     aracınızın her türlü ihtiyacını karşılıyoruz.
                   </p>
                 </div>
-
                 <div className="grid grid-cols-2 gap-4 sm:gap-6">
                   <div className="bg-white p-4 sm:p-6 rounded-xl shadow-md">
                     <div className="text-2xl sm:text-3xl font-bold text-green-800 mb-2">2500+</div>
@@ -957,7 +692,6 @@ export default function HomePage() {
                     <div className="text-gray-600 text-sm sm:text-base">Memnuniyet Oranı</div>
                   </div>
                 </div>
-
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
                     <CheckCircle className="h-5 w-5 text-green-800 flex-shrink-0" />
@@ -977,7 +711,6 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-
               <div className="relative">
                 <Image
                   src="/images/hakkimizda-teknisyen.jpeg"
@@ -992,7 +725,6 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-
             {/* Değerlerimiz */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
               <div className="text-center bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
@@ -1004,7 +736,6 @@ export default function HomePage() {
                   Tüm işlemlerimizde orjinal parça kullanımı ve işçilik garantisi sunuyoruz.
                 </p>
               </div>
-
               <div className="text-center bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
                 <div className="bg-green-100 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <Settings className="h-6 w-6 sm:h-8 sm:w-8 text-green-800" />
@@ -1014,7 +745,6 @@ export default function HomePage() {
                   Sürekli eğitim alan, sertifikalı teknisyenlerimiz ile profesyonel hizmet.
                 </p>
               </div>
-
               <div className="text-center bg-white p-6 sm:p-8 rounded-2xl shadow-lg">
                 <div className="bg-green-100 w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <Wrench className="h-6 w-6 sm:h-8 sm:w-8 text-green-800" />
@@ -1027,8 +757,8 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        {/* Gallery Section'dan sonra, Services Section'dan önce Galeri bölümünü ekle: */}
-        {/* Gallery Section */}
+
+        {/* Galeri Bölümü */}
         <section id="galeri" className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 sm:space-y-6 mb-12 sm:mb-16">
@@ -1044,8 +774,7 @@ export default function HomePage() {
                 Modern tesisimiz, son teknoloji ekipmanlarımız ve profesyonel çalışma ortamımızı keşfedin.
               </p>
             </div>
-
-            {/* Gallery Categories */}
+            {/* Galeri Kategorileri */}
             <div className="space-y-12 sm:space-y-16">
               {/* Çalışma Alanlarımız */}
               <div>
@@ -1067,10 +796,9 @@ export default function HomePage() {
                       <p className="text-sm">Geniş ve organize çalışma alanımız</p>
                     </div>
                   </div>
-
                   <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500">
                     <Image
-                      src="/images/galeri/kaporta-boya-firini.png"
+                      src="/images/galeri/kaporta-boya-firini.jpg"
                       alt="Kaporta Boya Fırını - Alkay Grup"
                       width={400}
                       height={300}
@@ -1082,7 +810,6 @@ export default function HomePage() {
                       <p className="text-sm">Yüksek kalite boya işlemleri</p>
                     </div>
                   </div>
-
                   <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500">
                     <Image
                       src="/images/galeri/musteri-bekleme-salonu.jpg"
@@ -1099,7 +826,6 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-
               {/* Uzman Ekipmanlarımız */}
               <div>
                 <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">
@@ -1120,7 +846,6 @@ export default function HomePage() {
                       <p className="text-sm">Orjinal Volkswagen teşhis sistemi</p>
                     </div>
                   </div>
-
                   <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500">
                     <Image
                       src="/images/galeri/klima-servisi-ekipman.jpg"
@@ -1135,10 +860,9 @@ export default function HomePage() {
                       <p className="text-sm">Profesyonel AC basınç göstergeleri</p>
                     </div>
                   </div>
-
                   <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500">
                     <Image
-                      src="/images/galeri/dsg-sanziman-servisi.png"
+                      src="/images/galeri/dsg-sanziman-servisi.jpg"
                       alt="DSG Şanzıman Servisi - Alkay Grup"
                       width={400}
                       height={300}
@@ -1152,62 +876,8 @@ export default function HomePage() {
                   </div>
                 </div>
               </div>
-
-              {/* Profesyonel Hizmet */}
-              <div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 sm:mb-8 text-center">
-                  Profesyonel Hizmet Sürecimiz
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                  <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500">
-                    <Image
-                      src="/images/galeri/uzman-teknisyen-kadrosu.jpg"
-                      alt="Uzman Teknisyen Kadrosu - Alkay Grup"
-                      width={400}
-                      height={300}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <h4 className="text-lg font-bold mb-1">Uzman Teknisyen Kadrosu</h4>
-                      <p className="text-sm">Deneyimli ve sertifikalı ekibimiz</p>
-                    </div>
-                  </div>
-
-                  <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500">
-                    <Image
-                      src="/images/galeri/orjinal-parca-deposu.jpg"
-                      alt="Orjinal Parça Deposu - Alkay Grup"
-                      width={400}
-                      height={300}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <h4 className="text-lg font-bold mb-1">Orjinal Parça Garantisi</h4>
-                      <p className="text-sm">Kaliteli yedek parça stoğumuz</p>
-                    </div>
-                  </div>
-
-                  <div className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500">
-                    <Image
-                      src="/images/galeri/arac-teslim-alani.jpg"
-                      alt="Araç Teslim Alanı - Alkay Grup"
-                      width={400}
-                      height={300}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <h4 className="text-lg font-bold mb-1">Profesyonel Araç Teslimi</h4>
-                      <p className="text-sm">Müşteri memnuniyeti odaklı hizmet</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
-
-            {/* Call to Action */}
+            {/* Randevu Al */}
             <div className="text-center mt-12 sm:mt-16">
               <div className="bg-green-50 rounded-2xl p-6 sm:p-8">
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">Tesisimizi Ziyaret Edin</h3>
@@ -1226,8 +896,8 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        // Gallery Section'dan sonra, şu iki bölümü ekle:
-        {/* Customer Reviews Section */}
+
+        {/* Müşteri Yorumları Bölümü */}
         <section id="yorumlar" className="py-12 sm:py-16 lg:py-20 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 sm:space-y-6 mb-12 sm:mb-16">
@@ -1243,8 +913,7 @@ export default function HomePage() {
                 15+ yıllık deneyimimiz ve kaliteli hizmetimizle kazandığımız müşteri memnuniyeti
               </p>
             </div>
-
-            {/* Reviews Grid */}
+            {/* Yorumlar Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
               {[
                 {
@@ -1308,9 +977,7 @@ export default function HomePage() {
                         </svg>
                       ))}
                     </div>
-
                     <p className="text-gray-600 mb-4 italic leading-relaxed">"{review.comment}"</p>
-
                     <div className="border-t pt-4">
                       <div className="flex items-center justify-between">
                         <div>
@@ -1329,30 +996,31 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* Stats */}
-            <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-                <div className="text-center">
+            {/* Müşteri Memnuniyeti İstatistikleri */}
+            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-lg">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8 text-center">
+                <div>
                   <div className="text-3xl sm:text-4xl font-bold text-green-800 mb-2">%99</div>
-                  <div className="text-gray-600 text-sm sm:text-base">Müşteri Memnuniyeti</div>
+                  <div className="text-gray-600">Müşteri Memnuniyeti</div>
                 </div>
-                <div className="text-center">
+                <div>
                   <div className="text-3xl sm:text-4xl font-bold text-green-800 mb-2">2500+</div>
-                  <div className="text-gray-600 text-sm sm:text-base">Mutlu Müşteri</div>
+                  <div className="text-gray-600">Mutlu Müşteri</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl sm:text-4xl font-bold text-green-800 mb-2">4.9</div>
-                  <div className="text-gray-600 text-sm sm:text-base">Ortalama Puan</div>
+                <div>
+                  <div className="text-3xl sm:text-4xl font-bold text-green-800 mb-2">4.9/5</div>
+                  <div className="text-gray-600">Ortalama Puan</div>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl sm:text-4xl font-bold text-green-800 mb-2">%95</div>
-                  <div className="text-gray-600 text-sm sm:text-base">Tekrar Tercih</div>
+                <div>
+                  <div className="text-3xl sm:text-4xl font-bold text-green-800 mb-2">15+</div>
+                  <div className="text-gray-600">Yıl Deneyim</div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        {/* Contact Section */}
+
+        {/* İletişim Bölümü */}
         <section id="iletisim" className="py-12 sm:py-16 lg:py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center space-y-4 sm:space-y-6 mb-12 sm:mb-16">
@@ -1365,267 +1033,125 @@ export default function HomePage() {
                 Bizimle <span className="text-green-800">İletişime Geçin</span>
               </h2>
               <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-                Aracınız için profesyonel hizmet almak üzere randevu alın veya sorularınızı bize iletin
+                Aracınızın ihtiyaçları için bize ulaşın. Ücretsiz ön değerlendirme ve detaylı bilgi için randevu alın.
               </p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12">
-              {/* Contact Form */}
+              {/* İletişim Bilgileri */}
+              <div className="space-y-6 sm:space-y-8">
+                <div>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">İletişim Bilgileri</h3>
+                  <div className="space-y-4 sm:space-y-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-green-100 w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <MessageCircle className="h-6 w-6 text-green-800" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-gray-900 mb-1">WhatsApp</h4>
+                        <p className="text-gray-600 mb-2">7/24 WhatsApp desteği</p>
+                        <a
+                          href="https://wa.me/905070503333"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-green-800 hover:text-green-900 font-medium"
+                        >
+                          +90 507 050 33 33
+                        </a>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-green-100 w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <Mail className="h-6 w-6 text-green-800" />
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-gray-900 mb-1">E-posta</h4>
+                        <p className="text-gray-600 mb-2">Detaylı bilgi ve randevu</p>
+                        <a
+                          href="mailto:alkaygrup@gmail.com"
+                          className="text-green-800 hover:text-green-900 font-medium"
+                        >
+                          alkaygrup@gmail.com
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Çalışma Saatleri */}
+                <div className="bg-gray-50 rounded-2xl p-6">
+                  <h4 className="font-bold text-gray-900 mb-4">Çalışma Saatleri</h4>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Pazartesi - Cuma</span>
+                      <span className="font-medium">08:00 - 18:00</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Cumartesi</span>
+                      <span className="font-medium">08:00 - 16:00</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Pazar</span>
+                      <span className="font-medium text-red-600">Kapalı</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Hızlı İletişim Formu */}
               <div className="bg-gray-50 rounded-2xl p-6 sm:p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Randevu Formu</h3>
-                <form className="space-y-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-6">Hızlı İletişim</h3>
+                <form className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                        Ad
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Ad Soyad</label>
                       <input
                         type="text"
-                        id="firstName"
-                        name="firstName"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
-                        placeholder="Adınız"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        placeholder="Adınız ve soyadınız"
                       />
                     </div>
                     <div>
-                      <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                        Soyad
-                      </label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Telefon</label>
                       <input
-                        type="text"
-                        id="lastName"
-                        name="lastName"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
-                        placeholder="Soyadınız"
+                        type="tel"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        placeholder="Telefon numaranız"
                       />
                     </div>
                   </div>
-
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Telefon
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
-                      placeholder="0555 123 45 67"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                      E-posta
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
-                      placeholder="ornek@email.com"
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="carBrand" className="block text-sm font-medium text-gray-700 mb-2">
-                        Araç Markası
-                      </label>
-                      <select
-                        id="carBrand"
-                        name="carBrand"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
-                      >
-                        <option value="">Marka Seçin</option>
-                        <option value="volkswagen">Volkswagen</option>
-                        <option value="audi">Audi</option>
-                        <option value="seat">SEAT</option>
-                        <option value="skoda">Škoda</option>
-                        <option value="fiat">Fiat</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label htmlFor="carModel" className="block text-sm font-medium text-gray-700 mb-2">
-                        Model
-                      </label>
-                      <input
-                        type="text"
-                        id="carModel"
-                        name="carModel"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
-                        placeholder="Golf, A3, Leon..."
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
-                      Hizmet Türü
-                    </label>
-                    <select
-                      id="service"
-                      name="service"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors"
-                    >
-                      <option value="">Hizmet Seçin</option>
-                      <option value="elektronik-teshis">Elektronik Arıza Tespit</option>
-                      <option value="dsg-sanziman">DSG & Otomatik Şanzıman</option>
-                      <option value="motor-onarim">Motor Onarım & Bakım</option>
-                      <option value="klima-servis">Klima Sistem Servisi</option>
-                      <option value="kaporta-boya">Kaporta & Boya</option>
-                      <option value="periyodik-bakim">Periyodik Bakım</option>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Araç Markası</label>
+                    <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                      <option value="">Marka seçiniz</option>
+                      <option value="volkswagen">Volkswagen</option>
+                      <option value="audi">Audi</option>
+                      <option value="seat">SEAT</option>
+                      <option value="skoda">Škoda</option>
+                      <option value="fiat">Fiat</option>
                     </select>
                   </div>
-
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Mesajınız
-                    </label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Mesajınız</label>
                     <textarea
-                      id="message"
-                      name="message"
                       rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors resize-none"
-                      placeholder="Aracınızla ilgili sorun veya isteklerinizi detaylı olarak açıklayın..."
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      placeholder="Aracınızın sorunu veya ihtiyacınız hakkında detay veriniz..."
                     ></textarea>
                   </div>
-
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4"
+                    className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3"
                   >
-                    <Calendar className="h-5 w-5 mr-2" />
-                    Randevu Talebi Gönder
+                    <MessageCircle className="h-5 w-5 mr-2" />
+                    Mesaj Gönder
                   </Button>
                 </form>
-              </div>
-
-              {/* Contact Info */}
-              <div className="space-y-8">
-                {/* Contact Details */}
-                <div className="bg-green-50 rounded-2xl p-6 sm:p-8">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6">İletişim Bilgileri</h3>
-                  <div className="space-y-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="bg-green-600 p-3 rounded-lg">
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                          />
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                          />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-1">Adres</h4>
-                        <p className="text-gray-600">
-                          Örnek Mahallesi, Otomotiv Caddesi No:123
-                          <br />
-                          34000 İstanbul, Türkiye
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start space-x-4">
-                      <div className="bg-green-600 p-3 rounded-lg">
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                          />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-1">Telefon</h4>
-                        <p className="text-gray-600">
-                          <a href="tel:+905070503333" className="hover:text-green-600 transition-colors">
-                            +90 507 050 33 33
-                          </a>
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start space-x-4">
-                      <div className="bg-green-600 p-3 rounded-lg">
-                        <Mail className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-1">E-posta</h4>
-                        <p className="text-gray-600">
-                          <a href="mailto:alkaygrup@gmail.com" className="hover:text-green-600 transition-colors">
-                            alkaygrup@gmail.com
-                          </a>
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start space-x-4">
-                      <div className="bg-green-600 p-3 rounded-lg">
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold text-gray-900 mb-1">Çalışma Saatleri</h4>
-                        <div className="text-gray-600 space-y-1">
-                          <p>Pazartesi - Cumartesi: 08:00 - 18:00</p>
-                          <p>Pazar: Kapalı</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Quick Contact Buttons */}
-                <div className="grid grid-cols-1 gap-4">
-                  <a
-                    href="https://wa.me/905070503333"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center space-x-3 bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-xl transition-colors"
-                  >
-                    <MessageCircle className="h-5 w-5" />
-                    <span>WhatsApp</span>
-                  </a>
-                </div>
-
-                {/* Map */}
-                <div className="bg-gray-100 rounded-2xl overflow-hidden">
-                  <div className="aspect-w-16 aspect-h-9 h-64">
-                    <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3010.2441!2d28.9784!3d41.0082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDAwJzI5LjUiTiAyOMKwNTgnNDIuMiJF!5e0!3m2!1str!2str!4v1234567890"
-                      width="100%"
-                      height="100%"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      className="rounded-2xl"
-                    ></iframe>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </section>
-        {/* Services Section */}
-        {/* About Section */}
       </div>
     </div>
   )
