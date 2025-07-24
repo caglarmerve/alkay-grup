@@ -62,18 +62,17 @@ export default function HomePage() {
       >
         <div className="p-4 sm:p-6 border-b border-gray-100">
           <div className="flex items-center space-x-3">
+
             <div className="relative">
               <Image
-                src="/images/alkay-grup-logo.png"
+                src="/images/logos/alkay-grup-logo.png"
                 alt="Alkay Grup Logo"
-                width={40}
-                height={40}
-                className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
+                width={80}
+                height={80}
+                className="h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20 object-contain"
               />
             </div>
-            <div>
-              <span className="text-lg sm:text-xl font-bold text-gray-900 tracking-tight">ALKAY GRUP</span>
-            </div>
+
           </div>
         </div>
 
@@ -168,10 +167,7 @@ export default function HomePage() {
             <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-white space-y-6 sm:space-y-8">
                 <div className="space-y-4 sm:space-y-6">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 sm:w-12 h-1 bg-green-600"></div>
-                    <span className="text-green-400 font-medium tracking-wide text-sm sm:text-base">ALKAY GRUP</span>
-                  </div>
+
 
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight">
                     <span className="block">Avrupa Markalarında</span>
@@ -669,19 +665,18 @@ export default function HomePage() {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
                 Güvenilir Hizmet, <span className="text-green-800">Uzman Çözümler</span>
               </h2>
-              <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-                2008 yılından bu yana Avrupa'nın prestijli otomotiv markalarında uzmanlaşmış, müşteri memnuniyetini
-                önceleyerek hizmet sunuyoruz.
-              </p>
+
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-center mb-12 sm:mb-16">
               <div className="space-y-6">
                 <div className="space-y-4">
-                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">15+ Yıllık Deneyim</h3>
+                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">15+ Yıllık Tecrübe</h3>
                   <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
-                    Volkswagen, Audi, SEAT, Škoda ve Fiat markalarında uzmanlaşmış kadromuz ile yetkili servis
-                    kalitesinde hizmet sunuyoruz. Modern ekipmanlarımız ve sürekli eğitim alan teknisyenlerimiz ile
-                    aracınızın her türlü ihtiyacını karşılıyoruz.
+                  Alkay Grup olarak, 15 yılı aşkın sektör tecrübemizle otomotiv servis hizmetlerinde kaliteyi ve güveni bir araya getiriyoruz. Alanında uzman ekibimiz ve son teknoloji ekipmanlarımızla, araçlarınız için en doğru ve etkili çözümleri sunuyoruz.
+
+Hizmet anlayışımızda kalite ve müşteri memnuniyeti daima ön plandadır. Aracınızı profesyonel ellere teslim ederek, tüm bakım ve onarım işlemlerinin titizlikle ve yüksek standartlarda gerçekleştirileceğinden emin olabilirsiniz.
+
+Alkay Grup'u tercih etmek, aracınız için doğru kararı vermek demektir. Biz, sizin ve aracınızın en iyisini hak ettiğine inanıyor; bu doğrultuda çalışmaktan gurur duyuyoruz.
                   </p>
                 </div>
                 <div className="grid grid-cols-2 gap-4 sm:gap-6">
