@@ -60,16 +60,15 @@ export default function HomePage() {
           sidebarOpen ? "w-80" : "w-0"
         } lg:w-80 overflow-hidden`}
       >
-        <div className="p-4 sm:p-6 border-b border-gray-100">
-          <div className="flex items-center space-x-3">
-
+                   <div className="p-4 sm:p-6 border-b border-gray-100">
+          <div className="flex flex-col items-center text-center space-y-4">
             <div className="relative">
               <Image
                 src="/images/logos/alkay-grup-logo.png"
                 alt="Alkay Grup Logo"
-                width={80}
-                height={80}
-                className="h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20 object-contain"
+                width={150}
+                height={150}
+                className="h-24 w-24 sm:h-28 sm:w-28 lg:h-32 lg:w-32 object-contain mx-auto"
               />
             </div>
 
